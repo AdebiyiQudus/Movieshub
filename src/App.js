@@ -51,24 +51,39 @@ const tempWatchedData = [
 
 const average = (arr) => arr.reduce((acc, cur) => acc + cur / arr.length, 0);
 
-// STRUCTURED COMPONENTS => responsible for rendering specific sections or layout in the UI
+// COMPONENT COMPOSITION => composing components together to build complex UIs (combining smaller components to create larger, more complex components)
 export default function App() {
   const [movies, setMovies] = useState(tempMovieData);
+   const [watched, setWatched] = useState(tempWatchedData);
+
   return (
     <>
-      <Navbar navBarResults={movies} />
-      <Main moviesData={movies} />
+      <Navbar>
+      <Search />
+      <NumResults foundResult={movies} />
+        </Navbar> 
+
+      <Main>
+        <Box>
+          <MovieList allMoviesList={movies} />
+        </Box>
+        
+        <Box>
+  {/* Parsing watchedProp(watched) which is an array of watched movies to WatchedSummary and WatchedMoviesList components for mapping repectively */}
+          <WatchedSummary watchedProp={watched} />
+          <WatchedMoviesList watchedProp={watched} />
+        </Box>
+      </Main>
     </>
   );
 }
 
-// =============== STRUCTURED COMPONENTS ===============
-function Navbar({ navBarResults }) {
+// STRUCTURED COMPONENTS => responsible for rendering specific sections or layout in the UI
+function Navbar({ children }) {
   return (
     <nav className="nav-bar">
-      <Logo />
-      <Search />
-      <NumResults foundResult={navBarResults} />
+       <Logo />
+      {children}
     </nav>
   );
 }
@@ -109,17 +124,16 @@ function NumResults({ foundResult }) {
 }
 
 // =============== STRUCTURED COMPONENT ===============
-function Main({ moviesData }) {
+function Main({ children }) {
   return (
     <main className="main">
-      <ListBox moviesListBox={moviesData} />
-      <WatchedBox />
+      {children}
     </main>
   );
 }
 
 // =============== STATEFUL COMPONENT ===============
-function ListBox({ moviesListBox }) {
+function Box({ children }) {
   const [isOpen1, setIsOpen1] = useState(true);
 
   return (
@@ -130,10 +144,30 @@ function ListBox({ moviesListBox }) {
       >
         {isOpen1 ? "–" : "+"}
       </button>
-      {isOpen1 && <MovieList allMoviesList={moviesListBox} />}
+      {isOpen1 &&  children }
     </div>
   );
 }
+
+// =============== STATEFUL COMPONENT ===============
+/*function WatchedBox() {
+  const [isOpen2, setIsOpen2] = useState(true);
+
+  return (
+    <div className="box">
+      <button
+        className="btn-toggle"
+        onClick={() => setIsOpen2((open) => !open)}
+      >
+        {isOpen2 ? "–" : "+"}
+      </button>
+      {isOpen2 && (
+          <WatchedSummary watchedProp={watched} />
+          <WatchedMoviesList watchedProp={watched} />
+      )}
+    </div>
+  );
+}*/
 
 // =============== STATEFUL COMPONENT ===============
 function MovieList({ allMoviesList }) {
@@ -160,30 +194,6 @@ function Movie({ movieProp }) {
         </p>
       </div>
     </li>
-  );
-}
-
-// =============== STATEFUL COMPONENT ===============
-function WatchedBox() {
-  const [watched, setWatched] = useState(tempWatchedData);
-  const [isOpen2, setIsOpen2] = useState(true);
-
-  return (
-    <div className="box">
-      <button
-        className="btn-toggle"
-        onClick={() => setIsOpen2((open) => !open)}
-      >
-        {isOpen2 ? "–" : "+"}
-      </button>
-      {isOpen2 && (
-        <>
-          {/* Parsing watchedProp(watched) which is an array of watched movies to WatchedSummary and WatchedMoviesList components for mapping repectively */}
-          <WatchedSummary watchedProp={watched} />
-          <WatchedMoviesList watchedProp={watched} />
-        </>
-      )}
-    </div>
   );
 }
 
@@ -222,29 +232,29 @@ function WatchedMoviesList({ watchedProp }) {
   return (
     <ul className="list">
       {watchedProp.map((movie) => (
-        <WatchedMovie movie={movie} key={movie.imdbID} />
+        <WatchedMovie watchedMovieProp={movie} key={movie.imdbID} />
       ))}
     </ul>
   );
 }
 
-function WatchedMovie({ movie }) {
+function WatchedMovie({ watchedMovieProp }) {
   return (
-    <li key={movie.imdbID}>
-      <img src={movie.Poster} alt={`${movie.Title} poster`} />
-      <h3>{movie.Title}</h3>
+    <li key={watchedMovieProp.imdbID}>
+      <img src={watchedMovieProp.Poster} alt={`${watchedMovieProp.Title} poster`} />
+      <h3>{watchedMovieProp.Title}</h3>
       <div>
         <p>
           <span>⭐️</span>
-          <span>{movie.imdbRating}</span>
+          <span>{watchedMovieProp.imdbRating}</span>
         </p>
         <p>
           <span>🌟</span>
-          <span>{movie.userRating}</span>
+          <span>{watchedMovieProp.userRating}</span>
         </p>
         <p>
           <span>⏳</span>
-          <span>{movie.runtime} min</span>
+          <span>{watchedMovieProp.runtime} min</span>
         </p>
       </div>
     </li>
