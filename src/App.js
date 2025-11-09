@@ -78,6 +78,19 @@ export default function App() {
   );
 }
 
+ // ALTERNATIVE WAY OF PASSING ELEMENT AS CHILDREN PROP 
+//  <Main>
+//         <Box element={<MovieList allMoviesList={movies} />} />
+
+//         <Box element={
+//           <>
+//             <WatchedSummary watchedProp={watched} />
+//             <WatchedMoviesList watchedProp={watched} />
+//           </>
+//         }>
+//       </Main>
+   
+
 // STRUCTURED COMPONENTS => responsible for rendering specific sections or layout in the UI
 function Navbar({ children }) {
   return (
@@ -134,22 +147,39 @@ function Main({ children }) {
 
 // =============== STATEFUL COMPONENT ===============
 function Box({ children }) {
-  const [isOpen1, setIsOpen1] = useState(true);
+  const [isOpen, setIsOpen] = useState(true);
 
   return (
     <div className="box">
       <button
         className="btn-toggle"
-        onClick={() => setIsOpen1((open) => !open)}
+        onClick={() => setIsOpen((open) => !open)}
       >
-        {isOpen1 ? "–" : "+"}
+        {isOpen ? "–" : "+"}
       </button>
-      {isOpen1 &&  children }
+      {isOpen &&  children }
     </div>
+
   );
 }
+// ALTERNATIVE PASSING ELEMENT AS CHILDREN PROP 
+// function Box({ element }) {
+//   const [isOpen, setIsOpen] = useState(true);
 
-// =============== STATEFUL COMPONENT ===============
+//   return (
+//     <div className="box">
+//       <button
+//         className="btn-toggle"
+//         onClick={() => setIsOpen((open) => !open)}
+//       >
+//         {isOpen ? "–" : "+"}
+//       </button>
+//       {isOpen &&  element }
+//     </div>
+//   );
+// }
+
+// =============== OR STATEFUL COMPONENT ===============
 /*function WatchedBox() {
   const [isOpen2, setIsOpen2] = useState(true);
 
