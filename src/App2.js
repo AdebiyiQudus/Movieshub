@@ -49,7 +49,8 @@ const tempWatchedData = [
 
 // PROP DRILLING => passing data from parent component to child component via props (Parsing prop from nested components to access data where needed i.e deeply nested components)
 
-const average = (arr) => arr.reduce((acc, cur) => acc + cur / arr.length, 0);
+const average = (arr) =>
+  arr.reduce((acc, cur) => acc + cur / arr.length, 0);
 
 // STRUCTURED COMPONENTS => responsible for rendering specific sections or layout in the UI
 export default function App() {
@@ -124,10 +125,7 @@ function ListBox({ moviesProp }) {
 
   return (
     <div className="box">
-      <button
-        className="btn-toggle"
-        onClick={() => setIsOpen1((open) => !open)}
-      >
+      <button className="btn-toggle" onClick={() => setIsOpen1((open) => !open)}>
         {isOpen1 ? "–" : "+"}
       </button>
       {isOpen1 && <MovieList moviesProp={moviesProp} />}
@@ -169,15 +167,12 @@ function WatchedBox() {
 
   return (
     <div className="box">
-      <button
-        className="btn-toggle"
-        onClick={() => setIsOpen2((open) => !open)}
-      >
+      <button className="btn-toggle" onClick={() => setIsOpen2((open) => !open)}>
         {isOpen2 ? "–" : "+"}
       </button>
       {isOpen2 && (
         <>
-          {/* Parsing watchedProp(watched) which is an array of watched movies to WatchedSummary and WatchedMoviesList components for mapping repectively */}
+  {/* Parsing watchedProp(watched) which is an array of watched movies to WatchedSummary and WatchedMoviesList components for mapping repectively */}       
           <WatchedSummary watchedProp={watched} />
           <WatchedMoviesList watchedProp={watched} />
         </>
