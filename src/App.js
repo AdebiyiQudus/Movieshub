@@ -56,19 +56,19 @@ export default function App() {
   const [movies, setMovies] = useState(tempMovieData);
   return (
     <>
-      <Navbar moviesProp={movies} />
-      <Main moviesProp={movies} />
+      <Navbar navBarResults={movies} />
+      <Main moviesData={movies} />
     </>
   );
 }
 
 // =============== STRUCTURED COMPONENTS ===============
-function Navbar({ moviesProp }) {
+function Navbar({ navBarResults }) {
   return (
     <nav className="nav-bar">
       <Logo />
       <Search />
-      <NumResults moviesProp={moviesProp} />
+      <NumResults foundResult={navBarResults} />
     </nav>
   );
 }
@@ -100,26 +100,26 @@ function Search() {
 }
 
 // =============== STATELESS COMPONENT ===============
-function NumResults({ moviesProp }) {
+function NumResults({ foundResult }) {
   return (
     <p className="num-results">
-      Found <strong>{moviesProp.length}</strong> results
+      Found <strong>{foundResult.length}</strong> results
     </p>
   );
 }
 
 // =============== STRUCTURED COMPONENT ===============
-function Main({ moviesProp }) {
+function Main({ moviesData }) {
   return (
     <main className="main">
-      <ListBox moviesProp={moviesProp} />
+      <ListBox moviesListBox={moviesData} />
       <WatchedBox />
     </main>
   );
 }
 
 // =============== STATEFUL COMPONENT ===============
-function ListBox({ moviesProp }) {
+function ListBox({ moviesListBox }) {
   const [isOpen1, setIsOpen1] = useState(true);
 
   return (
@@ -130,32 +130,33 @@ function ListBox({ moviesProp }) {
       >
         {isOpen1 ? "–" : "+"}
       </button>
-      {isOpen1 && <MovieList moviesProp={moviesProp} />}
+      {isOpen1 && <MovieList allMoviesList={moviesListBox} />}
     </div>
   );
 }
 
 // =============== STATEFUL COMPONENT ===============
-function MovieList({ moviesProp }) {
+function MovieList({ allMoviesList }) {
+
   return (
     <ul className="list">
-      {moviesProp?.map((movie) => (
-        <Movie movie={movie} key={movie.imdbID} />
+      {allMoviesList?.map((movie) => (
+        <Movie movieProp={movie} key={movie.imdbID} />
       ))}
     </ul>
   );
 }
-
+ 
 // =============== STATELESS COMPONENT ===============
-function Movie({ movie }) {
+function Movie({ movieProp }) {
   return (
     <li>
-      <img src={movie.Poster} alt={`${movie.Title} poster`} />
-      <h3>{movie.Title}</h3>
+      <img src={movieProp.Poster} alt={`${movieProp.Title} poster`} />
+      <h3>{movieProp.Title}</h3>
       <div>
         <p>
           <span>🗓</span>
-          <span>{movie.Year}</span>
+          <span>{movieProp.Year}</span>
         </p>
       </div>
     </li>
