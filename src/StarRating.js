@@ -2,3 +2,13 @@
 //  otherwise each time the components re-renders the style object will be created again and again which is not optimal for performance. So we can take it out of the component so that it is created only once.
 
 // Create an empty array with length of 5 element which takes 2 argument _ means current element which we are not using and i means index of the current element
+
+export default function StarRating () {
+  return (
+    <div style={{ display: "flex", gap: "4px" }}>
+      {Array.from({ length: 5 }, (_, i) => i).map((star) => (
+        <div key={star} style={{ width: "24px", height: "24px", backgroundColor: "gold" }} />
+      ))}
+    </div>
+  )
+}
