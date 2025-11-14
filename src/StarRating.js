@@ -35,5 +35,5 @@ export default function StarRating ({ maxRating = 5 }) {
     <p style={textstyle}>10</p>
   </div>
 )
-  
+
 }
