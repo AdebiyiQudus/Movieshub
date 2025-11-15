@@ -1,6 +1,8 @@
 // You can take out the style object which does'nt change on anything that is inside the StarRating component so the style object does not regenerate by js each time the component re-renders
 //  otherwise each time the components re-renders the style object will be created again and again which is not optimal for performance. So we can take it out of the component so that it is created only once.
 
+import { useState } from "react";
+
 const containerStyle = {
   display: "flex",
   gap: "16px",
@@ -9,7 +11,6 @@ const containerStyle = {
 
 const starContainerStyle = {
   display: "flex",
-  gap: "4px",
 };
 
 const textstyle = {
@@ -21,19 +22,68 @@ const textstyle = {
 
 // set a default value for the props in case no value is passed from the parent component ( Destructuring the props directly in the function parameter whenhere no value is passed from Index.js file)
 export default function StarRating ({ maxRating = 5 }) {
+  const [rating, setRating] = useState(0);
+
+  function handleRating(rating) {
+    setRating(rating);
+  }
+
   return (
   <div style={containerStyle}>
     <div style={starContainerStyle}>
 
 {/* Create an empty array with length of 5 element which takes 2 argument _ means current element which we are not using and i means index of the current element */}
       {Array.from({ length: maxRating }, (_, i) => (
-        <span >
-          S{i + 1}
-        </span>
+       <Star key={i} onRateClick={() => handleRating(i + 1)} />
       ))}
     </div>
-    <p style={textstyle}>10</p>
+    <p style={textstyle}>{rating || ""}</p>
   </div>
-)
-
+  );
 }
+
+const starStyle = {
+  width: "48px",
+  height: "48px",
+  display: "block",
+  cursor: "pointer",
+}
+
+// role="button" for accessibility to let screen readers know that this is a button
+function Star({ onRateClick, full }) {
+  return (
+    <span role="button" style={starStyle} onClickProp={onRateClick}>
+     { <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        fill="#000"
+        stroke="#000"
+      >
+        <path
+          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+        />
+      </svg>}
+    </span>
+  )
+}
+
+/*
+FULL STAR
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 20 20"
+  fill="#000"
+  stroke="#000"
+>
+  <path
+    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+  />
+</svg>
+
+
+EMPTY STAR
+
+
+
+*/
