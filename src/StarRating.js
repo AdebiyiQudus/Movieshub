@@ -22,7 +22,7 @@ const textstyle = {
 
 // set a default value for the props in case no value is passed from the parent component ( Destructuring the props directly in the function parameter whenhere no value is passed from Index.js file)
 export default function StarRating ({ maxRating = 5 }) {
-  const [rating, setRating] = useState(1);
+  const [rating, setRating] = useState(0);
 
   function handleRating(rating) {
     setRating(rating);
@@ -36,10 +36,11 @@ export default function StarRating ({ maxRating = 5 }) {
       {Array.from({ length: maxRating }, (_, i) => (
        <Star key={i} onRateClick={() => handleRating(i + 1)} 
 
-       // if current rating is >= i+1 then full star will be displayed (True)else empty star (false)
+       // if current hover temp rating is >= i+1 then full star will be displayed (True)else empty star (false)
        full={rating >= i + 1} />
       ))}
     </div>
+    {/* If there is no temp rating then display current rating also if rating does not exist then display empty string */}
     <p style={textstyle}>{rating || ""}</p>
   </div>
   );
