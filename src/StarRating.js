@@ -56,7 +56,8 @@ const starStyle = {
 function Star({ onRateClick, full }) {
   return (
     <span role="button" style={starStyle} onClick={onRateClick}>
-     { full ? <svg
+{/* Ternary operator to render full star or empty star based on the full prop passed from StarRating component  */}
+      { full ? <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
         fill="#000"
