@@ -23,6 +23,7 @@ const textstyle = {
 // set a default value for the props in case no value is passed from the parent component ( Destructuring the props directly in the function parameter whenhere no value is passed from Index.js file)
 export default function StarRating ({ maxRating = 5 }) {
   const [rating, setRating] = useState(0);
+  const [tempRating, setTempRating] = useState(0);
 
   function handleRating(rating) {
     setRating(rating);
@@ -31,17 +32,20 @@ export default function StarRating ({ maxRating = 5 }) {
   return (
   <div style={containerStyle}>
     <div style={starContainerStyle}>
-
 {/* Create an empty array with length of 5 element which takes 2 argument _ means current element which we are not using and i means index of the current element */}
       {Array.from({ length: maxRating }, (_, i) => (
-       <Star key={i} onRateClick={() => handleRating(i + 1)} 
+       <Star key={i}
 
-       // if current hover temp rating is >= i+1 then full star will be displayed (True)else empty star (false)
-       full={rating >= i + 1} />
+ // if current hover temp rating is >= i+1 then full star will be displayed (True)else empty star (false)
+       full={tempRating ? tempRating >= i + 1 : rating >= i + 1}
+        onRateClick={() => handleRating(i + 1)} 
+        onHoverIn={() => setTempRating(i + 1)}
+        onHoverOut={() => setTempRating(0)}     
+       />
       ))}
     </div>
     {/* If there is no temp rating then display current rating also if rating does not exist then display empty string */}
-    <p style={textstyle}>{rating || ""}</p>
+    <p style={textstyle}>{tempRating || rating || ""}</p>
   </div>
   );
 }
@@ -54,9 +58,13 @@ const starStyle = {
 }
 
 // role="button" for accessibility to let screen readers know that this is a button. use onclick event to handle click on Rating star
-function Star({ onRateClick, full }) {
+function Star({ onRateClick, full, onHoverIn, onHoverOut }) {
   return (
-    <span role="button" style={starStyle} onClick={onRateClick}>
+    <span role="button" style={starStyle} 
+    onClick={onRateClick} 
+    onMouseEnter={onHoverIn}
+     onMouseLeave={onHoverOut}>
+
 {/* Ternary operator to render full star or empty star based on the full prop passed from StarRating component  */}
       { full ? <svg
         xmlns="http://www.w3.org/2000/svg"
