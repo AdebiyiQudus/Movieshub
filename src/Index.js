@@ -8,7 +8,8 @@ root.render(
   <React.StrictMode>
     {/* <App /> */}
     <StarRating maxRating={5} />
-    
+
+    {/*Another user customization example for reusing the StarRating component */}
 
     {/*<StarRating maxRating={7} />
      <StarRating maxRating={10} />

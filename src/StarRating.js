@@ -1,6 +1,8 @@
 // You can take out the style object which does'nt change on anything that is inside the StarRating component so the style object does not regenerate by js each time the component re-renders
 //  otherwise each time the components re-renders the style object will be created again and again which is not optimal for performance. So we can take it out of the component so that it is created only once.
 
+// If tempRating exists(hovering) then show message for tempRating (current hovered rating - 1, if user is not hovering then show message for current clicked rating -1)
+// If FALSE (if message.length is not = 5) fallback to numeric value display ( either tempRating or rating or empty string)
 import { useState } from "react";
 
 const containerStyle = {
@@ -29,6 +31,7 @@ export default function StarRating ({ maxRating = 5 }) {
     setRating(rating);
   }
 
+  // Set a default className for any user in the future that wants to customize the star rating component(font style, font size, font-family, color etc)
   return (
   <div style={containerStyle}>
     <div style={starContainerStyle}>
@@ -36,7 +39,7 @@ export default function StarRating ({ maxRating = 5 }) {
       {Array.from({ length: maxRating }, (_, i) => (
        <Star key={i}
 
- // if current hover temp rating is >= i+1 then full star will be displayed (True)else empty star (false)
+ // if current hover temp rating is >= i+1 then full star will be displayed else check if current rating is >= i+1 then full star will be displayed else empty star will be displayed
        full={tempRating ? tempRating >= i + 1 : rating >= i + 1}
         onRateClick={() => handleRating(i + 1)} 
         onHoverIn={() => setTempRating(i + 1)}
@@ -44,7 +47,7 @@ export default function StarRating ({ maxRating = 5 }) {
        />
       ))}
     </div>
-    {/* If there is no temp rating then display current rating also if rating does not exist then display empty string */}
+    {/* If there is no tempRating (Hover rating) then display current rating also if rating does not exist then display empty string */}
     <p style={textstyle}>{tempRating || rating || ""}</p>
   </div>
   );
