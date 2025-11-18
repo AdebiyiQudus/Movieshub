@@ -1,5 +1,6 @@
 // You can take out the style object which does'nt change on anything that is inside the StarRating component so the style object does not regenerate by js each time the component re-renders
 //  otherwise each time the components re-renders the style object will be created again and again which is not optimal for performance. So we can take it out of the component so that it is created only once.
+// SEED DATA => Seed data is the sample or default data you put in a database so your app has something to work with before real users use it.
 
 // If tempRating exists(hovering) then show message for tempRating (current hovered rating - 1, if user is not hovering then show message for current clicked rating -1)
 // If FALSE (if message.length is not = 5) fallback to numeric value display ( either tempRating or rating or empty string)
@@ -14,6 +15,8 @@ const containerStyle = {
 const starContainerStyle = {
   display: "flex",
 };
+
+// Add prop and give a default value in case no value is passed from parent component
 
 const textstyle = {
   fontSize: "18px",
