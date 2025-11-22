@@ -56,15 +56,17 @@ export default function StarRating ({ maxRating = 5 }) {
   );
 }
 
-
-// role="button" for accessibility to let screen readers know that this is a button. use onclick event to handle click on Rating star
-function Star({ onRateClick, full, onHoverIn, onHoverOut }) {
   const starStyle = {
   width: "48px",
   height: "48px",
   display: "block",
   cursor: "pointer",
 }
+
+
+// role="button" for accessibility to let screen readers know that this is a button. use onclick event to handle click on Rating star
+function Star({ onRateClick, full, onHoverIn, onHoverOut }) {
+
   return (
     <span role="button" style={starStyle} 
     onClick={onRateClick} 
