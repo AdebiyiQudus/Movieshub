@@ -1,9 +1,6 @@
 // You can take out the style object which does'nt change on anything that is inside the StarRating component so the style object does not regenerate by js each time the component re-renders
 //  otherwise each time the components re-renders the style object will be created again and again which is not optimal for performance. So we can take it out of the component so that it is created only once.
-// SEED DATA => Seed data is the sample or default data you put in a database so your app has something to work with before real users use it.
 
-// If tempRating exists(hovering) then show message for tempRating (current hovered rating - 1, if user is not hovering then show message for current clicked rating -1)
-// If FALSE (if message.length is not = 5) fallback to numeric value display ( either tempRating or rating or empty string)
 import { useState } from "react";
 
 const containerStyle = {
@@ -22,8 +19,10 @@ export default function StarRating ({
   color = "#fcc419",
   size = 48,
   className = "",
+  messages = [],
   }) {
 
+  // SEED DATA => Seed data is the sample or default data you put in a database so your app has something to work with before real users use it.
   const [rating, setRating] = useState(0);
   const [tempRating, setTempRating] = useState(0);
 
@@ -42,7 +41,7 @@ export default function StarRating ({
 
   // Set a default className for any user in the future that wants to customize the star rating component(font style, font size, font-family, color etc)
   return (
-  <div style={containerStyle}>
+  <div style={containerStyle} classNameProp={className}>
     <div style={starContainerStyle}>
 {/* Create an empty array with length of 5 element which takes 2 argument _ means current element which we are not using and i means index of the current element */}
       {Array.from({ length: maxRating }, (_, i) => (
@@ -58,28 +57,33 @@ export default function StarRating ({
        />
       ))}
     </div>
-    {/* If there is no tempRating (Hover rating) then display current rating also if rating does not exist then display empty string */}
-    <p style={textstyle}>{tempRating || rating || ""}</p>
-  </div>
-  );
-}
+    
+    {/* If tempRating exists(hovering) then show message for tempRating (current hovered rating - 1, if user is not hovering then show message for current clicked rating -1)
+     If FALSE (if message.length is not = 5) fallback to numeric value display ( either tempRating or rating or empty string) */}
+    <p style={textstyle}>
+      { messages.length === maxRating
+        ? messages[tempRating ? tempRating - 1 : rating - 1]
+        : tempRating || rating || ""}</p>
+    </div>
+    );
+  }
 
-// role="button" for accessibility to let screen readers know that this is a button. use onclick event to handle click on Rating star
-function Star({ onRateClick, full, onHoverIn, 
-  onHoverOut, colorProp, sizeProp }) {
+  // role="button" for accessibility to let screen readers know that this is a button. use onclick event to handle click on Rating star
+  function Star({ onRateClick, full, onHoverIn, 
+    onHoverOut, colorProp, sizeProp }) {
 
-  const starStyle = {
-    width: `${sizeProp}px`,
-    height: `${sizeProp}px`,
-    display: "block",
-    cursor: "pointer",
-  };
+    const starStyle = {
+      width: `${sizeProp}px`,
+      height: `${sizeProp}px`,
+      display: "block",
+      cursor: "pointer",
+    };
 
-  return (
-  <span role="button" style={starStyle} 
-  onClick={onRateClick} 
-  onMouseEnter={onHoverIn}
-    onMouseLeave={onHoverOut}>
+    return (
+    <span role="button" style={starStyle} 
+    onClick={onRateClick} 
+    onMouseEnter={onHoverIn}
+      onMouseLeave={onHoverOut}>
 
 {/* Ternary operator to render full star or empty star based on the full prop passed from StarRating component  */}
       { full ? <svg

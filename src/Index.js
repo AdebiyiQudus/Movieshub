@@ -1,4 +1,4 @@
-// Adding customization feature to the StarRating component so that other users can reuse the component according to (rating, different spacing in btw thw stars and also asked the customer to spcify  text labels appears )
+// Adding customization feature to the StarRating component so that other users can reuse the component according to (rating, different spacing in btw the stars and also asked the customer to spcify  text labels appears )
 
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -9,9 +9,11 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     {/* <App /> */}
-    <StarRating maxRating={5} />
+    <StarRating maxRating={5} 
+    messages={["Terrible", "Bad", "Okay", "Good", "Amazing"]} />
 
     {/*Another user customization example for reusing the StarRating component */}
+     <StarRating size={24} color="red" className="test" />
     {/* When a user set a default rating to 3 as a prop  */}
     {/*<StarRating maxRating={7} />
      <StarRating maxRating={10} />
