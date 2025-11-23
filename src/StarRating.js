@@ -20,14 +20,17 @@ export default function StarRating ({
   size = 48,
   className = "",
   messages = [],
+  defaultRating = 0,
+  onSetRating,
   }) {
 
   // SEED DATA => Seed data is the sample or default data you put in a database so your app has something to work with before real users use it.
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(defaultRating);
   const [tempRating, setTempRating] = useState(0);
 
   function handleRating(rating) {
     setRating(rating);
+    onSetRating(rating);
   }
 
   // Add prop and give a default value in case no value is passed from parent component
