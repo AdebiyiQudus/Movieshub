@@ -6,6 +6,7 @@ import ReactDOM from "react-dom/client";
 // import App from "./App";
 import StarRating from "./StarRating";
 
+// User Customization Example for reusing the StarRating component
 function Test() {
   const [movieRating, setMovieRating] = useState(0);
 

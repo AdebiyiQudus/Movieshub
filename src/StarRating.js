@@ -33,7 +33,6 @@ export default function StarRating ({
     onSetRating(rating);
   }
 
-  // Add prop and give a default value in case no value is passed from parent component
   const textstyle = {
   fontWeight: "bold",
   lineHeight: "1",
