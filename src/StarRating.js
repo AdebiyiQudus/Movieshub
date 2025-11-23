@@ -2,6 +2,8 @@
 //  otherwise each time the components re-renders the style object will be created again and again which is not optimal for performance. So we can take it out of the component so that it is created only once.
 
 import { useState } from "react";
+// Type checking => checking each type of the prop and specifying which type of prop is required for the component to work properly ( you can use prop-types package for type checking in react components)
+import Proptypes from "prop-types";
 
 const containerStyle = {
   display: "flex",
@@ -12,6 +14,19 @@ const containerStyle = {
 const starContainerStyle = {
   display: "flex",
 };
+
+// Proptype => This is a tool used in React to check the type of props passed to a component and ensures that a component receives the correct type of data.
+StarRating.propTypes = {
+  maxRating: Proptypes.number,
+  color: Proptypes.string,
+  size: Proptypes.number,
+  className: Proptypes.string,
+  messages: Proptypes.string,
+  defaultRating: Proptypes.number,
+  onSetRating: Proptypes.func,
+  // onsetRating: Prototypes.bool
+// onsetRating: Prototypes.object
+}
 
 // set a default value for the props in case no value is passed from the parent component ( Destructuring the props directly in the function parameter whenhere no value is passed from Index.js file)
 export default function StarRating ({ 
