@@ -114,6 +114,7 @@ function Logo() {
 //STATEFUL COMPONENTS => manages and maintains its own state
 function Search() {
   const [query, setQuery] = useState("");
+  
   return (
     <div className="search">
       <input
