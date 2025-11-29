@@ -234,7 +234,8 @@ function WatchedSummary({ watchedProp }) {
     ((movie) => movie.imdbRating));
   const avgUserRating = average(watchedProp.map
     ((movie) => movie.userRating));
-  const avgRuntime = average(watchedProp.map((movie) => movie.runtime));
+  const avgRuntime = average(watchedProp.map
+    ((movie) => movie.runtime));
 
   return (
     <div className="summary">
