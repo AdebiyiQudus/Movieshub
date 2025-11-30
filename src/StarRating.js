@@ -24,7 +24,7 @@ StarRating.propTypes = {
   messages: Proptypes.string,
   defaultRating: Proptypes.number,
   onSetRating: Proptypes.func,
-  // onsetRating: Prototypes.bool
+  // onsetRating: Prototypes.bool (boolean type)
 // onsetRating: Prototypes.object
 }
 
