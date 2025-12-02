@@ -163,6 +163,7 @@ function Box({ children }) {
 
   );
 }
+
 // ALTERNATIVE PASSING ELEMENT AS CHILDREN PROP 
 // function Box({ element }) {
 //   const [isOpen, setIsOpen] = useState(true);
