@@ -278,7 +278,8 @@ function WatchedMoviesList({ watchedProp }) {
 function WatchedMovie({ watchedMovieProp }) {
   return (
     <li key={watchedMovieProp.imdbID}>
-      <img src={watchedMovieProp.Poster} alt={`${watchedMovieProp.Title} poster`} />
+      <img src={watchedMovieProp.Poster} 
+      alt={`${watchedMovieProp.Title} poster`} />
       <h3>{watchedMovieProp.Title}</h3>
       <div>
         <p>
