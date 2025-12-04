@@ -281,6 +281,7 @@ function WatchedMovie({ watchedMovieProp }) {
       <img src={watchedMovieProp.Poster} 
       alt={`${watchedMovieProp.Title} poster`} />
       <h3>{watchedMovieProp.Title}</h3>
+      
       <div>
         <p>
           <span>⭐️</span>
