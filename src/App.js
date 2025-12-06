@@ -217,7 +217,8 @@ function MovieList({ allMoviesList }) {
 function Movie({ movieProp }) {
   return (
     <li>
-      <img src={movieProp.Poster} alt={`${movieProp.Title} poster`} />
+      <img src={movieProp.Poster} 
+      alt={`${movieProp.Title} poster`} />
       <h3>{movieProp.Title}</h3>
       <div>
         <p>
@@ -281,7 +282,7 @@ function WatchedMovie({ watchedMovieProp }) {
       <img src={watchedMovieProp.Poster} 
       alt={`${watchedMovieProp.Title} poster`} />
       <h3>{watchedMovieProp.Title}</h3>
-      
+
       <div>
         <p>
           <span>⭐️</span>
