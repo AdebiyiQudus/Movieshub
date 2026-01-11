@@ -9,7 +9,13 @@ import { StrictMode } from "react";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <StrictMode>
-     {/* <StarRating />  */}
     <App />
+     {/* <StarRating maxRating={5} 
+  messages={["Terrible", "Bad", "Okay", "Good", "Amazing"]} />
+
+  {/*Another user customization example for reusing the StarRating component */}
+   {/* <StarRating size={24} color="red" className="test" defaultRating={3} /> */}
+
+     {/* <StarRating />  */}
   </StrictMode>
 );

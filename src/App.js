@@ -63,14 +63,19 @@ const KEY = "45d089db"; // OMDB API key
 export default function App() {
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
+  const query = "interstellar";
 
   // Side effect to fetch movies from OMDB API
   useEffect(function() {
-    fetch(` http://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=interstellar`)
-      .then((res) => res.json())
-      .then((data) => {
-        setMovies(data.Search);
-      });
+    async function fetchMovies() {
+      const res = await fetch(
+        ` http://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=${query}`
+      );
+      const data = await res.json();
+      setMovies(data.Search);
+      console.log(data.Search);
+    }
+    fetchMovies();
   }, []); 
 
   return (
