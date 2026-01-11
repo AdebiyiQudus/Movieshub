@@ -49,28 +49,35 @@ const tempWatchedData = [
 
 // PROP DRILLING => passing data from parent component to child component via props (Parsing prop from nested components to access data where needed i.e deeply nested components)
 
-const average = (arr) => arr.reduce
-  ((acc, cur) => acc + cur / arr.length, 0);
+const average = (arr) => arr.reduce((acc, cur) => acc + cur / arr.length, 0);
+
+const KEY = "45d089db"; // OMDB API key
 
 // COMPONENT COMPOSITION => composing components together to build complex UIs (combining smaller components to create larger, more complex components)
 export default function App() {
   const [movies, setMovies] = useState(tempMovieData);
-   const [watched, setWatched] = useState(tempWatchedData);
+  const [watched, setWatched] = useState(tempWatchedData);
+
+  fetch(` http://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=avengers`)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+    });
 
   return (
     <>
       <Navbar>
-      <Search />
-      <NumResults foundResult={movies} />
-        </Navbar> 
+        <Search />
+        <NumResults foundResult={movies} />
+      </Navbar>
 
       <Main>
         <Box>
           <MovieList allMoviesList={movies} />
         </Box>
-        
+
         <Box>
-  {/* Parsing watchedProp(watched) which is an array of watched movies to WatchedSummary and WatchedMoviesList components for mapping repectively */}
+          {/* Parsing watchedProp(watched) which is an array of watched movies to WatchedSummary and WatchedMoviesList components for mapping repectively */}
           <WatchedSummary watchedProp={watched} />
           <WatchedMoviesList watchedProp={watched} />
         </Box>
@@ -79,7 +86,7 @@ export default function App() {
   );
 }
 
- // ALTERNATIVE WAY OF PASSING ELEMENT AS CHILDREN PROP 
+// ALTERNATIVE WAY OF PASSING ELEMENT AS CHILDREN PROP
 //  <Main>
 //         <Box element={<MovieList allMoviesList={movies} />} />
 
@@ -90,13 +97,12 @@ export default function App() {
 //           </>
 //         }>
 //       </Main>
-   
 
 // STRUCTURED COMPONENTS => responsible for rendering specific sections or layout in the UI
 function Navbar({ children }) {
   return (
     <nav className="nav-bar">
-       <Logo />
+      <Logo />
       {children}
     </nav>
   );
@@ -117,14 +123,16 @@ function Search() {
   const [query, setQuery] = useState("");
 
   return (
-    <div className="search">
-      <input
-        className="search"
-        type="text"
-        placeholder="Search movies..."
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-      />
+    <div className="search-container">
+      <div className="search">
+        <input
+          className="search"
+          type="text"
+          placeholder="Search movies..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+      </div>
     </div>
   );
 }
@@ -140,11 +148,7 @@ function NumResults({ foundResult }) {
 
 // =============== STRUCTURED COMPONENT ===============
 function Main({ children }) {
-  return (
-    <main className="main">
-      {children}
-    </main>
-  );
+  return <main className="main">{children}</main>;
 }
 
 // =============== STATEFUL COMPONENT ===============
@@ -153,19 +157,15 @@ function Box({ children }) {
 
   return (
     <div className="box">
-      <button
-        className="btn-toggle"
-        onClick={() => setIsOpen((open) => !open)}
-      >
+      <button className="btn-toggle" onClick={() => setIsOpen((open) => !open)}>
         {isOpen ? "–" : "+"}
       </button>
-      {isOpen &&  children }
+      {isOpen && children}
     </div>
-
   );
 }
 
-// ALTERNATIVE PASSING ELEMENT AS CHILDREN PROP 
+// ALTERNATIVE PASSING ELEMENT AS CHILDREN PROP
 // function Box({ element }) {
 //   const [isOpen, setIsOpen] = useState(true);
 
@@ -204,7 +204,6 @@ function Box({ children }) {
 
 // =============== STATEFUL COMPONENT ===============
 function MovieList({ allMoviesList }) {
-
   return (
     <ul className="list">
       {allMoviesList?.map((movie) => (
@@ -213,13 +212,12 @@ function MovieList({ allMoviesList }) {
     </ul>
   );
 }
- 
+
 // =============== STATELESS COMPONENT ===============
 function Movie({ movieProp }) {
   return (
     <li>
-      <img src={movieProp.Poster} 
-      alt={`${movieProp.Title} poster`} />
+      <img src={movieProp.Poster} alt={`${movieProp.Title} poster`} />
       <h3>{movieProp.Title}</h3>
       <div>
         <p>
@@ -233,13 +231,10 @@ function Movie({ movieProp }) {
 
 // =============== STATELESS COMPONENTS ===============
 function WatchedSummary({ watchedProp }) {
-  const avgImdbRating = average(watchedProp.map
-    ((movie) => movie.imdbRating));
-    
-  const avgUserRating = average(watchedProp.map
-    ((movie) => movie.userRating));
-  const avgRuntime = average(watchedProp.map
-    ((movie) => movie.runtime));
+  const avgImdbRating = average(watchedProp.map((movie) => movie.imdbRating));
+
+  const avgUserRating = average(watchedProp.map((movie) => movie.userRating));
+  const avgRuntime = average(watchedProp.map((movie) => movie.runtime));
 
   return (
     <div className="summary">
@@ -270,8 +265,7 @@ function WatchedMoviesList({ watchedProp }) {
   return (
     <ul className="list">
       {watchedProp.map((movie) => (
-        <WatchedMovie watchedMovieProp={movie} 
-        key={movie.imdbID} />
+        <WatchedMovie watchedMovieProp={movie} key={movie.imdbID} />
       ))}
     </ul>
   );
@@ -280,8 +274,10 @@ function WatchedMoviesList({ watchedProp }) {
 function WatchedMovie({ watchedMovieProp }) {
   return (
     <li key={watchedMovieProp.imdbID}>
-      <img src={watchedMovieProp.Poster} 
-      alt={`${watchedMovieProp.Title} poster`} />
+      <img
+        src={watchedMovieProp.Poster}
+        alt={`${watchedMovieProp.Title} poster`}
+      />
       <h3>{watchedMovieProp.Title}</h3>
 
       <div>

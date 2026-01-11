@@ -54,8 +54,7 @@ body {
   max-width: 42rem;
   background-color: var(--color-background-500);
   border-radius: 0.9rem;
-  /* overflow: scroll; */
-  overflow-y: auto;
+  overflow: scroll;
   position: relative;
 }
 
@@ -92,36 +91,18 @@ body {
 }
 
 .search {
-   justify-self: center;
+  justify-self: center;
   border: none;
-   /* padding: 1.1rem 1.6rem; */
-  font-size: 1.8rem; 
-  border-radius: 0.7rem; 
+  padding: 1.1rem 1.6rem;
+  font-size: 1.8rem;
+  border-radius: 0.7rem;
   width: 40rem;
   transition: all 0.3s;
   color: var(--color-text);
 
   /* background-color: var(--color-background-900); */
-  background-color: var(--color-primary-light);  
-
-  .search {
-  width: 100%;
-  max-width: 500px;
-  padding: 12px 16px;
-  border-radius: 0.7rem;
-  border: none;
-  outline: none;
-  font-size: 16px;
+  background-color: var(--color-primary-light);
 }
-
-}
-
-.search-container {
-  display: flex;
-  justify-content: center;
-  flex: 1;
-}
-
 
 .search::placeholder {
   color: var(--color-text-dark);
@@ -156,11 +137,8 @@ body {
 
 .list {
   list-style: none;
-  /* padding: 0.8rem 0; */
-  /* overflow: scroll; */
-  overflow-y: auto;
-  flex: 1;
-  padding-right: 6px;
+  padding: 0.8rem 0;
+  overflow: scroll;
 }
 
 .list-watched {
