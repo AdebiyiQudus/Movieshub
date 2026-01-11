@@ -1,5 +1,10 @@
-import { useState } from "react";
+// The function in the useEffect Hook is our effect and it contains the code that we want to run as a side effect.
+// Dependency array in useEffect Hook tells React when to re-run the effect. If any value in this array changes between renders, the effect will be re-executed.
+// If the dependency array is empty [], the effect will only run once after the initial render (componentDidMount behavior).
+// If there are dependencies, the effect will run after every render where any of the dependencies have changed.
 
+import { useState } from "react";
+import { useEffect } from "react";
 const tempMovieData = [
   {
     imdbID: "tt1375666",
@@ -55,14 +60,17 @@ const KEY = "45d089db"; // OMDB API key
 
 // COMPONENT COMPOSITION => composing components together to build complex UIs (combining smaller components to create larger, more complex components)
 export default function App() {
-  const [movies, setMovies] = useState(tempMovieData);
-  const [watched, setWatched] = useState(tempWatchedData);
+  const [movies, setMovies] = useState([]);
+  const [watched, setWatched] = useState([]);
 
-  fetch(` http://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=avengers`)
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-    });
+  // Side effect to fetch movies from OMDB API
+  useEffect(function() {
+    fetch(` http://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=avengers`)
+      .then((res) => res.json())
+      .then((data) => {
+        setMovies(data.Search);
+      });
+  }, []); 
 
   return (
     <>
