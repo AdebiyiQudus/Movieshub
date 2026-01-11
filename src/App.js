@@ -2,7 +2,8 @@
 // Dependency array in useEffect Hook tells React when to re-run the effect. If any value in this array changes between renders, the effect will be re-executed.
 // If the dependency array is empty [], the effect will only run once after the initial render (componentDidMount behavior).
 // If there are dependencies, the effect will run after every render where any of the dependencies have changed.
-
+// We use a Effects to keep a component in sync  with the external system (API, DOM, subscriptions, Timers etc)
+// We use event handlers to react to certain events that happens in the user interface (click, hover, form submission etc)
 import { useState } from "react";
 import { useEffect } from "react";
 const tempMovieData = [
@@ -65,7 +66,7 @@ export default function App() {
 
   // Side effect to fetch movies from OMDB API
   useEffect(function() {
-    fetch(` http://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=avengers`)
+    fetch(` http://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=interstellar`)
       .then((res) => res.json())
       .then((data) => {
         setMovies(data.Search);
