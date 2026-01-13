@@ -3,6 +3,7 @@
 // If the dependency array is empty [], the effect will only run once after the initial render (componentDidMount behavior).
 // If there are dependencies, the effect will run after every render where any of the dependencies have changed.
 // We use a Effects to keep a component in sync  with the external system (API, DOM, subscriptions, Timers etc)
+
 // We use event handlers to react to certain events that happens in the user interface (click, hover, form submission etc)
 import { useState } from "react";
 import { useEffect } from "react";
