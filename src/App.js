@@ -64,7 +64,7 @@ const KEY = "45d089db"; // OMDB API key
 export default function App() {
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
-  
+
   const query = "interstellar";
   const [isLoading, setIsLoading] = useState(false);
 
@@ -75,6 +75,7 @@ export default function App() {
       const res = await fetch(
         ` http://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=${query}`
       );
+      
       const data = await res.json();
       setMovies(data.Search);
       setIsLoading(false);
