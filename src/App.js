@@ -64,6 +64,7 @@ const KEY = "45d089db"; // OMDB API key
 export default function App() {
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
+  
   const query = "interstellar";
   const [isLoading, setIsLoading] = useState(false);
 
