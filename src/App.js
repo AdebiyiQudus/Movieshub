@@ -75,7 +75,7 @@ export default function App() {
       const res = await fetch(
         ` http://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=${query}`
       );
-      
+
       const data = await res.json();
       setMovies(data.Search);
       setIsLoading(false);
@@ -180,7 +180,8 @@ function Box({ children }) {
 
   return (
     <div className="box">
-      <button className="btn-toggle" onClick={() => setIsOpen((open) => !open)}>
+      <button className="btn-toggle"
+       onClick={() => setIsOpen((open) => !open)}>
         {isOpen ? "–" : "+"}
       </button>
       {isOpen && children}
