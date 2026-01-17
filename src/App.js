@@ -53,6 +53,7 @@ const tempWatchedData = [
     userRating: 9,
   },
 ];
+// is the error message coming from the new Error throwed or the error message is coming from the data response fetch  Api
 
 // PROP DRILLING => passing data from parent component to child component via props (Parsing prop from nested components to access data where needed i.e deeply nested components)
 
@@ -91,6 +92,7 @@ export default function App() {
       </Navbar>
 
       <Main>
+       {/* Mutually Exclusive Condition Rendering */}
         <Box>
       { isLoading ? <Loader /> : <MovieList allMoviesList={movies} />}
         </Box>
