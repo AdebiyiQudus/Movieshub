@@ -66,21 +66,36 @@ export default function App() {
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
 
-  const query = "interstellar";
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const query = "hsjfygaj";
 
   // Side effect to fetch movies from OMDB API
   useEffect(function() {
     async function fetchMovies() {
+     try{ 
       setIsLoading(true);
       const res = await fetch(
         ` http://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=${query}`
       );
 
+      if (!res.ok) 
+       throw new Error("Something went wrong with fetching movies");
+
       const data = await res.json();
+      if (data.Response === "False")
+       throw new Error("Movie not found!");
+
       setMovies(data.Search);
       setIsLoading(false);
+    } catch(err){
+      console.error(err); 
+      setError(err.message);
+
+    } finally{
+      setIsLoading(false);
     }
+     } 
     fetchMovies();
   }, []); 
 
@@ -94,7 +109,10 @@ export default function App() {
       <Main>
        {/* Mutually Exclusive Condition Rendering */}
         <Box>
-      { isLoading ? <Loader /> : <MovieList allMoviesList={movies} />}
+      {/* { isLoading ? <Loader /> : <MovieList allMoviesList={movies} />} */}
+          {isLoading && <Loader />}
+          {!isLoading && !error && <MovieList allMoviesList={movies} />}
+          {error && <ErrorMessage message={error} />}
         </Box>
 
         <Box>
@@ -111,6 +129,10 @@ function Loader() {
   return <p className="loader">Loading...</p>;
 }
 
+function ErrorMessage ({ message }) {
+  return <p className="error">
+    <span>⛔️</span>{message}</p>;
+}
 // ALTERNATIVE WAY OF PASSING ELEMENT AS CHILDREN PROP
 //  <Main>
 //         <Box element={<MovieList allMoviesList={movies} />} />
