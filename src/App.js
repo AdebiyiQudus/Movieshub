@@ -63,20 +63,33 @@ const KEY = "45d089db"; // OMDB API key
 
 // COMPONENT COMPOSITION => composing components together to build complex UIs (combining smaller components to create larger, more complex components)
 export default function App() {
+  const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const query = "hsjfygaj";
+  const tempQuery = "interstellar";
 
+  useEffect(function() {
+    console.log("After initial render")
+  }, []); 
+  useEffect(function() {
+    console.log("After every render")
+  }); 
+
+  useEffect(function() {
+    console.log("After initial render and whenever 'query' changes")
+  }, [query]);
+
+  console.log("During render")
   // Side effect to fetch movies from OMDB API
   useEffect(function() {
     async function fetchMovies() {
      try{ 
       setIsLoading(true);
       const res = await fetch(
-        ` http://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=${query}`
+        `http://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=${tempQuery}`
       );
 
       if (!res.ok) 
@@ -87,7 +100,6 @@ export default function App() {
        throw new Error("Movie not found!");
 
       setMovies(data.Search);
-      setIsLoading(false);
     } catch(err){
       console.error(err); 
       setError(err.message);
@@ -102,7 +114,7 @@ export default function App() {
   return (
     <>
       <Navbar>
-        <Search />
+        <Search queryProp={query} setQueryProp={setQuery} />
         <NumResults foundResult={movies} />
       </Navbar>
 
@@ -112,7 +124,7 @@ export default function App() {
       {/* { isLoading ? <Loader /> : <MovieList allMoviesList={movies} />} */}
           {isLoading && <Loader />}
           {!isLoading && !error && <MovieList allMoviesList={movies} />}
-          {error && <ErrorMessage message={error} />}
+          {error && <ErrorMessage messageProp={error} />}
         </Box>
 
         <Box>
@@ -166,9 +178,7 @@ function Logo() {
 }
 
 //STATEFUL COMPONENTS => manages and maintains its own state
-function Search() {
-  const [query, setQuery] = useState("");
-
+function Search({queryProp, setQueryProp}) {
   return (
     <div className="search-container">
       <div className="search">
@@ -176,8 +186,8 @@ function Search() {
           className="search"
           type="text"
           placeholder="Search movies..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          value={queryProp}
+          onChange={(e) => setQueryProp(e.target.value)}
         />
       </div>
     </div>
