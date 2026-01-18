@@ -63,7 +63,7 @@ const KEY = "45d089db"; // OMDB API key
 
 // COMPONENT COMPOSITION => composing components together to build complex UIs (combining smaller components to create larger, more complex components)
 export default function App() {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState("inception");
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
 
@@ -71,7 +71,7 @@ export default function App() {
   const [error, setError] = useState("");
   const tempQuery = "interstellar";
 
-  useEffect(function() {
+  /*useEffect(function() {
     console.log("After initial render")
   }, []); 
   useEffect(function() {
@@ -83,13 +83,15 @@ export default function App() {
   }, [query]);
 
   console.log("During render")
+  */
+
   // Side effect to fetch movies from OMDB API
   useEffect(function() {
     async function fetchMovies() {
      try{ 
       setIsLoading(true);
       const res = await fetch(
-        `http://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=${tempQuery}`
+        `http://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=${query}`
       );
 
       if (!res.ok) 
@@ -107,9 +109,15 @@ export default function App() {
     } finally{
       setIsLoading(false);
     }
-     } 
+     }
+     
+     if (query.length < 3) {
+      setMovies([]);
+      setError("");
+      return;
+     }
     fetchMovies();
-  }, []); 
+  }, [query]); 
 
   return (
     <>
