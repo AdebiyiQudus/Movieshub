@@ -283,7 +283,8 @@ function MovieList({ allMoviesList }) {
 function Movie({ movieProp }) {
   return (
     <li>
-      <img src={movieProp.Poster} alt={`${movieProp.Title} poster`} />
+      <img src={movieProp.Poster} 
+      alt={`${movieProp.Title} poster`} />
       <h3>{movieProp.Title}</h3>
       <div>
         <p>
