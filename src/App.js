@@ -86,12 +86,12 @@ export default function App() {
   */
 
   function handleSelectMovie(id) { 
-    setSelectedId(id)
+   setSelectedId((selectedId) => (id === selectedId ? null : id));
   }
 
   // Update ID Based on Movie Selected -> if the selected ID is the cuurent selected ID, then set it to null (deselect), otherwise set it to the new ID
   function handleCloseMovie(id) {
-    setSelectedId((selectedId) => (id === selectedId ? null : selectedId));
+    setSelectedId(null);
   }
 
   // Side effect to fetch movies from OMDB API
