@@ -85,6 +85,15 @@ export default function App() {
   console.log("During render")
   */
 
+  function handleSelectMovie(id) { 
+    setSelectedId(id)
+  }
+
+  // Update ID Based on Movie Selected -> if the selected ID is the cuurent selected ID, then set it to null (deselect), otherwise set it to the new ID
+  function handleCloseMovie(id) {
+    setSelectedId((selectedId) => (id === selectedId ? null : selectedId));
+  }
+
   // Side effect to fetch movies from OMDB API
   useEffect(function() {
     async function fetchMovies() {
@@ -102,6 +111,7 @@ export default function App() {
        throw new Error("Movie not found!");
 
       setMovies(data.Search);
+      console.log(data.Search);
     } catch(err){
       console.error(err); 
       setError(err.message);
@@ -131,14 +141,22 @@ export default function App() {
         <Box>
       {/* { isLoading ? <Loader /> : <MovieList allMoviesList={movies} />} */}
           {isLoading && <Loader />}
-          {!isLoading && !error && <MovieList allMoviesList={movies} />}
+          {!isLoading && !error && <MovieList allMoviesList={movies}
+          onSelectMovieE={handleSelectMovie} />}
           {error && <ErrorMessage messageProp={error} />}
         </Box>
 
+{/* Parsing watchedProp(watched) which is an array of watched movies to WatchedSummary and WatchedMoviesList components for mapping repectively */}
         <Box>
-          {/* Parsing watchedProp(watched) which is an array of watched movies to WatchedSummary and WatchedMoviesList components for mapping repectively */}
+          {selectedId ? (
+            <MovieDetails selectedIdProp={selectedId} 
+            onCloseMovieE={handleCloseMovie} />
+          ) : (
+            <>
           <WatchedSummary watchedProp={watched} />
           <WatchedMoviesList watchedProp={watched} />
+            </>
+          )}
         </Box>
       </Main>
     </>
@@ -269,20 +287,21 @@ function Box({ children }) {
 }*/
 
 // =============== STATEFUL COMPONENT ===============
-function MovieList({ allMoviesList }) {
+function MovieList({ allMoviesList, onSelectMovieE }) {
   return (
-    <ul className="list">
+    <ul className="list list-movies">
       {allMoviesList?.map((movie) => (
-        <Movie movieProp={movie} key={movie.imdbID} />
+        <Movie movieProp={movie} key={movie.imdbID} 
+        onSelectMovie={onSelectMovieE} />
       ))}
     </ul>
   );
 }
-
+ 
 // =============== STATELESS COMPONENT ===============
-function Movie({ movieProp }) {
+function Movie({ movieProp, onSelectMovie }) {
   return (
-    <li>
+    <li onClick={() => onSelectMovie(movieProp.imdbID)}>
       <img src={movieProp.Poster} 
       alt={`${movieProp.Title} poster`} />
       <h3>{movieProp.Title}</h3>
@@ -294,6 +313,15 @@ function Movie({ movieProp }) {
       </div>
     </li>
   );
+}
+
+function MovieDetails({ selectedIdProp, onCloseMovieE }) { 
+  return <div className="details">
+    <button className="btn-back" onClick={onCloseMovieE}>
+      &larr;
+    </button>
+    {selectedIdProp}
+    </div>;
 }
 
 // =============== STATELESS COMPONENTS ===============
