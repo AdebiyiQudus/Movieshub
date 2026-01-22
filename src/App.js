@@ -208,6 +208,7 @@ function Search({queryProp, setQueryProp}) {
   return (
     <div className="search-container">
       <div className="search">
+        
         <input
           className="search"
           type="text"
