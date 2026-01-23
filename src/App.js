@@ -208,7 +208,7 @@ function Search({queryProp, setQueryProp}) {
   return (
     <div className="search-container">
       <div className="search">
-        
+
         <input
           className="search"
           type="text"
@@ -317,6 +317,17 @@ function Movie({ movieProp, onSelectMovie }) {
 }
 
 function MovieDetails({ selectedIdProp, onCloseMovieE }) { 
+  useEffect(function () {
+    async function getMovieDetails() {
+       const res = await fetch(
+        `http://www.omdbapi.com/?apikey=${KEY}&i=${selectedIdProp}`
+      );
+      const data = await res.json();
+      console.log(data);
+    }
+    getMovieDetails();
+  },[]);
+
   return <div className="details">
     <button className="btn-back" onClick={onCloseMovieE}>
       &larr;
