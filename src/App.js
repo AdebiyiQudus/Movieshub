@@ -85,6 +85,7 @@ export default function App() {
   console.log("During render")
   */
 
+  // Update ID Based on Movie Selected
   function handleSelectMovie(id) { 
    setSelectedId((selectedId) => 
     (id === selectedId ? null : id));
