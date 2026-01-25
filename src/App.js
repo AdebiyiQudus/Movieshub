@@ -86,7 +86,8 @@ export default function App() {
   */
 
   function handleSelectMovie(id) { 
-   setSelectedId((selectedId) => (id === selectedId ? null : id));
+   setSelectedId((selectedId) => 
+    (id === selectedId ? null : id));
   }
 
   // Update ID Based on Movie Selected -> if the selected ID is the cuurent selected ID, then set it to null (deselect), otherwise set it to the new ID
