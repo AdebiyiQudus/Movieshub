@@ -319,6 +319,22 @@ function Movie({ movieProp, onSelectMovie }) {
 }
 
 function MovieDetails({ selectedIdProp, onCloseMovieE }) { 
+  const [movie, setMovie] = useState({});
+
+  const {
+    Title: title,
+    Poster: poster,
+    Year: year,
+    Runtime:runtime,
+     imdbRating,
+     Plot: plot,
+    Released: Released,
+    Director: Director,
+    Actors: Actors,
+    Genre:genre,} = movie;
+
+    console.log(title, year);
+
   useEffect(function () {
     async function getMovieDetails() {
        const res = await fetch(
@@ -326,6 +342,7 @@ function MovieDetails({ selectedIdProp, onCloseMovieE }) {
       );
       const data = await res.json();
       console.log(data);
+      setMovie(data);
     }
     getMovieDetails();
   },[]);
