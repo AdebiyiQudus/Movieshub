@@ -326,12 +326,13 @@ function MovieDetails({ selectedIdProp, onCloseMovieE }) {
     Poster: poster,
     Year: year,
     Runtime:runtime,
-     imdbRating,
-     Plot: plot,
+    imdbRating,
+    Plot: plot,
     Released: Released,
     Director: Director,
     Actors: Actors,
-    Genre:genre,} = movie;
+    Genre:genre,
+  } = movie;
 
     console.log(title, year);
 
