@@ -165,6 +165,7 @@ export default function App() {
   );
 }
 
+// =============== STATELESS COMPONENTS ===============
 function Loader() {
   return <p className="loader">Loading...</p>;
 }
