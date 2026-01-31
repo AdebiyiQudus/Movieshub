@@ -319,6 +319,7 @@ function Movie({ movieProp, onSelectMovie }) {
   );
 }
 
+// ============== STATEFUL COMPONENT ===============
 function MovieDetails({ selectedIdProp, onCloseMovieE }) { 
   const [movie, setMovie] = useState({});
 
