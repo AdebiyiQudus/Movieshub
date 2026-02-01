@@ -338,6 +338,7 @@ function MovieDetails({ selectedIdProp, onCloseMovieE }) {
 
     console.log(title, year);
 
+// Side effect to fetch movie details from OMDB API based on selectedIdProp
   useEffect(function () {
     async function getMovieDetails() {
        const res = await fetch(
