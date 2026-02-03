@@ -63,7 +63,7 @@ const KEY = "45d089db"; // OMDB API key
 
 // COMPONENT COMPOSITION => composing components together to build complex UIs (combining smaller components to create larger, more complex components)
 export default function App() {
-  const [query, setQuery] = useState("interstellar");
+  const [query, setQuery] = useState("inception");
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
 
@@ -330,9 +330,9 @@ function MovieDetails({ selectedIdProp, onCloseMovieE }) {
     Runtime:runtime,
     imdbRating,
     Plot: plot,
-    Released: Released,
-    Director: Director,
-    Actors: Actors,
+    Released: released,
+    Director: director,
+    Actors: actors,
     Genre:genre,
   } = movie;
 
@@ -352,11 +352,34 @@ function MovieDetails({ selectedIdProp, onCloseMovieE }) {
   },[]);
 
   return <div className="details">
+  <header> 
     <button className="btn-back" onClick={onCloseMovieE}>
       &larr;
     </button>
+    <img src={poster} alt={`Poster of ${title} movie`} />
+    <div className="details-overview">
+      <h2>{title}</h2>
+      <p>
+        {released} &bull; {runtime} &bull; {genre}
+      </p>
+      <p> {genre}</p>
+      <p>
+        <span>⭐️</span>
+        {imdbRating} IMDb rating
+      </p>
+    </div>
+    </header>
+
+    <section> 
+      <p>
+        <em>{plot}</em>
+      </p>
+      <p>Starring {actors}</p>
+      <p>Directed by {director}</p>
+    </section>
     {selectedIdProp}
     </div>;
+    
 }
 
 // =============== STATELESS COMPONENTS ===============
