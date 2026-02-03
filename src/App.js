@@ -336,8 +336,6 @@ function MovieDetails({ selectedIdProp, onCloseMovieE }) {
     Genre:genre,
   } = movie;
 
-    console.log(title, year);
-
 // Side effect to fetch movie details from OMDB API based on selectedIdProp
   useEffect(function () {
     async function getMovieDetails() {
