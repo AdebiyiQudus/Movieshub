@@ -382,7 +382,8 @@ function MovieDetails({ selectedIdProp, onCloseMovieE }) {
 
 // =============== STATELESS COMPONENTS ===============
 function WatchedSummary({ watchedProp }) {
-  const avgImdbRating = average(watchedProp.map((movie) => movie.imdbRating));
+  const avgImdbRating = 
+  average(watchedProp.map((movie) => movie.imdbRating));
 
   const avgUserRating = average(watchedProp.map((movie) => movie.userRating));
   const avgRuntime = average(watchedProp.map((movie) => movie.runtime));
