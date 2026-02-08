@@ -4,6 +4,7 @@
 // If there are dependencies, the effect will run after every render where any of the dependencies have changed.
 // We use a Effects to keep a component in sync  with the external system (API, DOM, subscriptions, Timers etc)
 
+// update watched movie based on current watched and return a new watched movie based on all the element of the new array and the new movie object added to the watched list
 // We use event handlers to react to certain events that happens in the user interface (click, hover, form submission etc)
 import StarRating from "./StarRating";
 import { useState } from "react";
@@ -64,7 +65,7 @@ const KEY = "45d089db"; // OMDB API key
 
 // COMPONENT COMPOSITION => composing components together to build complex UIs (combining smaller components to create larger, more complex components)
 export default function App() {
-  const [query, setQuery] = useState("inception");
+  const [query, setQuery] = useState("interstellar");
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
 
@@ -95,6 +96,10 @@ export default function App() {
   // Update ID Based on Movie Selected -> if the selected ID is the cuurent selected ID, then set it to null (deselect), otherwise set it to the new ID
   function handleCloseMovie(id) {
     setSelectedId(null);
+  }
+
+  function handleAddWatched(movie) {
+    setWatched((watched) => [...watched, movie]);
   }
 
   // Side effect to fetch movies from OMDB API
