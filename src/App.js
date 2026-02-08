@@ -5,6 +5,7 @@
 // We use a Effects to keep a component in sync  with the external system (API, DOM, subscriptions, Timers etc)
 
 // We use event handlers to react to certain events that happens in the user interface (click, hover, form submission etc)
+import StarRating from "./StarRating";
 import { useState } from "react";
 import { useEffect } from "react";
 const tempMovieData = [
@@ -63,7 +64,7 @@ const KEY = "45d089db"; // OMDB API key
 
 // COMPONENT COMPOSITION => composing components together to build complex UIs (combining smaller components to create larger, more complex components)
 export default function App() {
-  const [query, setQuery] = useState("interstellar");
+  const [query, setQuery] = useState("inception");
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
 
@@ -322,6 +323,7 @@ function Movie({ movieProp, onSelectMovie }) {
 // ============== STATEFUL COMPONENT ===============
 function MovieDetails({ selectedIdProp, onCloseMovieE }) { 
   const [movie, setMovie] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     Title: title,
@@ -339,46 +341,56 @@ function MovieDetails({ selectedIdProp, onCloseMovieE }) {
 // Side effect to fetch movie details from OMDB API based on selectedIdProp
   useEffect(function () {
     async function getMovieDetails() {
+      setIsLoading(true);
        const res = await fetch(
         `http://www.omdbapi.com/?apikey=${KEY}&i=${selectedIdProp}`
       );
       const data = await res.json();
       console.log(data);
       setMovie(data);
+      setIsLoading(false);
+      
     }
     getMovieDetails();
-  },[]);
+  },[selectedIdProp]);
 
-  return <div className="details">
-  <header> 
-    <button className="btn-back" onClick={onCloseMovieE}>
-      &larr;
-    </button>
-    <img src={poster} alt={`Poster of ${title} movie`} />
-    <div className="details-overview">
-      <h2>{title}</h2>
-      <p>
-        {released} &bull; {runtime} &bull; {genre}
-      </p>
-      <p> {genre}</p>
-      <p>
-        <span>⭐️</span>
-        {imdbRating} IMDb rating
-      </p>
-    </div>
-    </header>
+  return (
+     <div className="details">
+    {isLoading ? <Loader /> : (
+      <>
+    <header> 
+      <button className="btn-back" onClick={onCloseMovieE}>
+        &larr;
+      </button>
+      <img src={poster} alt={`Poster of ${title} movie`} />
+      <div className="details-overview">
+        <h2>{title}</h2>
+        <p>
+          {released} &bull; {runtime} &bull; {genre}
+        </p>
+        <p> {genre}</p>
+        <p>
+          <span>⭐️</span>
+          {imdbRating} IMDb rating
+        </p>
+      </div>
+      </header>
 
-    <section> 
-      <p>
-        <em>{plot}</em>
-      </p>
-      <p>Starring {actors}</p>
-      <p>Directed by {director}</p>
-    </section>
-    {selectedIdProp}
-    </div>;
-    
-}
+      <section> 
+        <div className="rating">
+          <StarRating maxRating={10} size={24} />
+        </div>
+        <p>
+          <em>{plot}</em>
+        </p>
+        <p>Starring {actors}</p>
+        <p>Directed by {director}</p>
+      </section>
+      </>
+      )}
+      </div>
+      );
+  }
 
 // =============== STATELESS COMPONENTS ===============
 function WatchedSummary({ watchedProp }) {
