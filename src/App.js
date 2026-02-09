@@ -404,6 +404,7 @@ function WatchedSummary({ watchedProp }) {
 
   const avgUserRating = 
   average(watchedProp.map((movie) => movie.userRating));
+  
   const avgRuntime = average(watchedProp.map((movie) => movie.runtime));
 
   return (
