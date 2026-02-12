@@ -343,6 +343,17 @@ function MovieDetails({ selectedIdProp, onCloseMovieE }) {
     Genre:genre,
   } = movie;
 
+  function handleAddWatched() {
+    const newWatchedMovie = {
+      imdbID: selectedIdProp,
+      Title: title,
+      Year: year,
+      Poster: poster,
+      imdbRating: Number(imdbRating),
+      runtime: Number(runtime.split(" ")[0]),
+    }
+  }
+
 // Side effect to fetch movie details from OMDB API based on selectedIdProp
   useEffect(function () {
     async function getMovieDetails() {
