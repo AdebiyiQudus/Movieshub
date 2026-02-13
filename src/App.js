@@ -343,6 +343,7 @@ function MovieDetails({ selectedIdProp, onCloseMovieE }) {
     Genre:genre,
   } = movie;
 
+  // Function to handle adding a movie to the watched list
   function handleAddWatched() {
     const newWatchedMovie = {
       imdbID: selectedIdProp,
