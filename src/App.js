@@ -445,6 +445,7 @@ function WatchedSummary({ watchedProp }) {
   );
 }
 
+// =============== STATELESS COMPONENTS ===============
 function WatchedMoviesList({ watchedProp }) {
   return (
     <ul className="list">
