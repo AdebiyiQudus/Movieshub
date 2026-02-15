@@ -457,6 +457,7 @@ function WatchedMoviesList({ watchedProp }) {
   );
 }
 
+// =============== STATELESS COMPONENTS ===============
 function WatchedMovie({ watchedMovieProp }) {
   return (
     <li key={watchedMovieProp.imdbID}>
