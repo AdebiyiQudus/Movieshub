@@ -473,7 +473,7 @@ function WatchedMovie({ watchedMovieProp }) {
           <span>{watchedMovieProp.imdbRating}</span>
         </p>
         <p>
-          <span>🌟</span>
+          <span>🌟</span>x
           <span>{watchedMovieProp.userRating}</span>
         </p>
         <p>
