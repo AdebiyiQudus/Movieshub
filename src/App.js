@@ -65,7 +65,7 @@ const KEY = "45d089db"; // OMDB API key
 
 // COMPONENT COMPOSITION => composing components together to build complex UIs (combining smaller components to create larger, more complex components)
 export default function App() {
-  const [query, setQuery] = useState("Fast and Furious");
+  const [query, setQuery] = useState("Money Heist");
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
 
@@ -326,7 +326,7 @@ function Movie({ movieProp, onSelectMovie }) {
 }
 
 // ============== STATEFUL COMPONENT ===============
-function MovieDetails({ selectedIdProp, onCloseMovieE }) { 
+function  MovieDetails({ selectedIdProp, onCloseMovieE }) { 
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
