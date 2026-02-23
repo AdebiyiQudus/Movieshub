@@ -59,13 +59,16 @@ const tempWatchedData = [
 
 // PROP DRILLING => passing data from parent component to child component via props (Parsing prop from nested components to access data where needed i.e deeply nested components)
 
-const average = (arr) => arr.reduce((acc, cur) => acc + cur / arr.length, 0);
+const average = (arr) =>
+  arr.length === 0
+    ? 0
+    : arr.reduce((acc, cur) => acc + cur, 0) / arr.length;
 
 const KEY = "45d089db"; // OMDB API key
 
 // COMPONENT COMPOSITION => composing components together to build complex UIs (combining smaller components to create larger, more complex components)
 export default function App() {
-  const [query, setQuery] = useState("Money Heist");
+  const [query, setQuery] = useState("inception");
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
 
@@ -332,6 +335,7 @@ function Movie({ movieProp, onSelectMovie }) {
 function  MovieDetails({ selectedIdProp, onCloseMovieE, onAddWatchedE }) { 
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [userRating, setUserRating] = useState("");
 
   const {
     Title: title,
@@ -355,8 +359,10 @@ function  MovieDetails({ selectedIdProp, onCloseMovieE, onAddWatchedE }) {
       Poster: poster,
       imdbRating: Number(imdbRating),
       runtime: Number(runtime.split(" ").at(0)),
+      userRating,
     };
     onAddWatchedE(newWatchedMovie);
+    onCloseMovieE();
   }
 
 // Side effect to fetch movie details from OMDB API based on selectedIdProp
@@ -399,9 +405,13 @@ function  MovieDetails({ selectedIdProp, onCloseMovieE, onAddWatchedE }) {
 
       <section> 
         <div className="rating">
-          <StarRating maxRating={10} size={24} />
+          <StarRating maxRating={10} size={24} 
+          onSetRating={setUserRating}/>
+
+          {userRating > 0 && (
          <button className="btn-add" onClick={handleAddWatched}>
-          + Add to watched list</button>
+          + Add to watched list</button>  
+          )}
         </div>
         <p>
           <em>{plot}</em>
@@ -436,15 +446,15 @@ function WatchedSummary({ watchedProp }) {
         </p>
         <p>
           <span>⭐️</span>
-          <span>{avgImdbRating.toFixed(2)}</span>
+          <span>{avgImdbRating.toFixed(1)}</span>
         </p>
         <p>
           <span>🌟</span>
-          <span>{avgUserRating.toFixed(2)}</span>
+          <span>{avgUserRating.toFixed(1)}</span>
         </p>
         <p>
           <span>⏳</span>
-          <span>{avgRuntime.toFixed(2)} min</span>
+          <span>{avgRuntime.toFixed(1)} min</span>
         </p>
       </div>
     </div>
@@ -468,10 +478,10 @@ function WatchedMovie({ watchedMovieProp }) {
   return (
     <li key={watchedMovieProp.imdbID}>
       <img
-        src={watchedMovieProp.poster}
-        alt={`${watchedMovieProp.title} poster`}
+        src={watchedMovieProp.Poster}
+        alt={`${watchedMovieProp.Title} poster`}
       />
-      <h3>{watchedMovieProp.title}</h3>
+      <h3>{watchedMovieProp.Title}</h3>
 
       <div>
         <p>
@@ -479,7 +489,7 @@ function WatchedMovie({ watchedMovieProp }) {
           <span>{watchedMovieProp.imdbRating}</span>
         </p>
         <p>
-          <span>🌟</span>x
+          <span>🌟</span>
           <span>{watchedMovieProp.userRating}</span>
         </p>
         <p>
