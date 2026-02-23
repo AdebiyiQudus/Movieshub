@@ -60,8 +60,7 @@ const tempWatchedData = [
 // PROP DRILLING => passing data from parent component to child component via props (Parsing prop from nested components to access data where needed i.e deeply nested components)
 
 const average = (arr) =>
-  arr.length === 0
-    ? 0
+  arr.length === 0 ? 0
     : arr.reduce((acc, cur) => acc + cur, 0) / arr.length;
 
 const KEY = "45d089db"; // OMDB API key
