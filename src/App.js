@@ -98,9 +98,10 @@ export default function App() {
     setSelectedId(null);
   }
 
+  // Update Watched List Based on Movie Selected -> add the selected movie to the watched list by creating a new array with the current watched movies and the new movie object added to the end of the array
   function handleAddWatched(movie) {
     setWatched((watched) => [...watched, movie]);
-  }
+  }  
 
   // Side effect to fetch movies from OMDB API
   useEffect(function() {
@@ -158,7 +159,9 @@ export default function App() {
         <Box>
           {selectedId ? (
             <MovieDetails selectedIdProp={selectedId} 
-            onCloseMovieE={handleCloseMovie} />
+            onCloseMovieE={handleCloseMovie} 
+            onAddWatchedE={handleAddWatched}
+              />
           ) : (
             <>
           <WatchedSummary watchedProp={watched} />
@@ -326,7 +329,7 @@ function Movie({ movieProp, onSelectMovie }) {
 }
 
 // ============== STATEFUL COMPONENT ===============
-function  MovieDetails({ selectedIdProp, onCloseMovieE }) { 
+function  MovieDetails({ selectedIdProp, onCloseMovieE, onAddWatchedE }) { 
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
@@ -351,8 +354,9 @@ function  MovieDetails({ selectedIdProp, onCloseMovieE }) {
       Year: year,
       Poster: poster,
       imdbRating: Number(imdbRating),
-      runtime: Number(runtime.split(" ")[0]),
-    }
+      runtime: Number(runtime.split(" ").at(0)),
+    };
+    onAddWatchedE(newWatchedMovie);
   }
 
 // Side effect to fetch movie details from OMDB API based on selectedIdProp
@@ -396,6 +400,8 @@ function  MovieDetails({ selectedIdProp, onCloseMovieE }) {
       <section> 
         <div className="rating">
           <StarRating maxRating={10} size={24} />
+         <button className="btn-add" onClick={handleAddWatched}>
+          + Add to watched list</button>
         </div>
         <p>
           <em>{plot}</em>
@@ -462,10 +468,10 @@ function WatchedMovie({ watchedMovieProp }) {
   return (
     <li key={watchedMovieProp.imdbID}>
       <img
-        src={watchedMovieProp.Poster}
-        alt={`${watchedMovieProp.Title} poster`}
+        src={watchedMovieProp.poster}
+        alt={`${watchedMovieProp.title} poster`}
       />
-      <h3>{watchedMovieProp.Title}</h3>
+      <h3>{watchedMovieProp.title}</h3>
 
       <div>
         <p>
