@@ -391,6 +391,7 @@ function  MovieDetails({ selectedIdProp, onCloseMovieE, onAddWatchedE }) {
       <img src={poster} alt={`Poster of ${title} movie`} />
       <div className="details-overview">
         <h2>{title}</h2>
+        
         <p>
           {released} &bull; {runtime} &bull; {genre}
         </p>
