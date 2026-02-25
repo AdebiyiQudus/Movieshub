@@ -320,6 +320,7 @@ function Movie({ movieProp, onSelectMovie }) {
       <img src={movieProp.Poster} 
       alt={`${movieProp.Title} poster`} />
       <h3>{movieProp.Title}</h3>
+      
       <div>
         <p>
           <span>🗓</span>
@@ -391,7 +392,7 @@ function  MovieDetails({ selectedIdProp, onCloseMovieE, onAddWatchedE }) {
       <img src={poster} alt={`Poster of ${title} movie`} />
       <div className="details-overview">
         <h2>{title}</h2>
-        
+
         <p>
           {released} &bull; {runtime} &bull; {genre}
         </p>
