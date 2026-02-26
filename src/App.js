@@ -6,6 +6,7 @@
 
 // update watched movie based on current watched and return a new watched movie based on all the element of the new array and the new movie object added to the watched list
 // We use event handlers to react to certain events that happens in the user interface (click, hover, form submission etc)
+
 import StarRating from "./StarRating";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -320,7 +321,7 @@ function Movie({ movieProp, onSelectMovie }) {
       <img src={movieProp.Poster} 
       alt={`${movieProp.Title} poster`} />
       <h3>{movieProp.Title}</h3>
-      
+
       <div>
         <p>
           <span>🗓</span>
