@@ -341,7 +341,7 @@ function  MovieDetails({ selectedIdProp, onCloseMovieE, onAddWatchedE, watchedPr
   const [userRating, setUserRating] = useState("");
 
   // Check if this (watched) array of object includes the array that is currently selected by the user (selectedIdProp) 
-  const isWwatched = watchedProp.map((movie) => 
+  const isWatched = watchedProp.map((movie) => 
     movie.imdbID).includes(selectedIdProp);
 
   const {
@@ -413,13 +413,19 @@ function  MovieDetails({ selectedIdProp, onCloseMovieE, onAddWatchedE, watchedPr
 
       <section> 
         <div className="rating">
+        {!isWatched ? (
+          <>
           <StarRating maxRating={10} size={24} 
-          onSetRating={setUserRating}/>
+        onSetRating={setUserRating}/>
 
-          {userRating > 0 && (
-         <button className="btn-add" onClick={handleAddWatched}>
-          + Add to watched list</button>  
-          )}
+        {userRating > 0 && (
+        <button className="btn-add" onClick={handleAddWatched}>
+        + Add to watched list</button>  
+          )} 
+          </> 
+        ) : (
+          <p>You already watched this movie</p>
+        )}
         </div>
         <p>
           <em>{plot}</em>
