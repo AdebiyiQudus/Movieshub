@@ -87,7 +87,7 @@ export default function App() {
   useEffect(function() {
     console.log("After initial render and whenever 'query' changes")
   }, [query]);
-
+ 
   console.log("During render")
   */
 
@@ -165,7 +165,8 @@ export default function App() {
             <MovieDetails selectedIdProp={selectedId} 
             onCloseMovieE={handleCloseMovie} 
             onAddWatchedE={handleAddWatched}
-              />
+            watchedProp={watched}
+              /> 
           ) : (
             <>
           <WatchedSummary watchedProp={watched} />
@@ -334,10 +335,14 @@ function Movie({ movieProp, onSelectMovie }) {
 }
 
 // ============== STATEFUL COMPONENT ===============
-function  MovieDetails({ selectedIdProp, onCloseMovieE, onAddWatchedE }) { 
+function  MovieDetails({ selectedIdProp, onCloseMovieE, onAddWatchedE, watchedProp }) { 
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState("");
+
+  // Check if this (watched) array of object includes the array that is currently selected by the user (selectedIdProp) 
+  const isWwatched = watchedProp.map((movie) => 
+    movie.imdbID).includes(selectedIdProp);
 
   const {
     Title: title,
