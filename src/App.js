@@ -344,6 +344,9 @@ function  MovieDetails({ selectedIdProp, onCloseMovieE, onAddWatchedE, watchedPr
   const isWatched = watchedProp.map((movie) => 
     movie.imdbID).includes(selectedIdProp);
 
+  const watchedUserRating = watchedProp.find((movie) =>
+    movie.imdbID === selectedIdProp)?.userRating;
+
   const {
     Title: title,
     Poster: poster,
@@ -416,7 +419,7 @@ function  MovieDetails({ selectedIdProp, onCloseMovieE, onAddWatchedE, watchedPr
         {!isWatched ? (
           <>
           <StarRating maxRating={10} size={24} 
-        onSetRating={setUserRating}/>
+          onSetRating={setUserRating}/>
 
         {userRating > 0 && (
         <button className="btn-add" onClick={handleAddWatched}>
@@ -424,7 +427,10 @@ function  MovieDetails({ selectedIdProp, onCloseMovieE, onAddWatchedE, watchedPr
           )} 
           </> 
         ) : (
-          <p>You already watched this movie</p>
+          <p>You already watched this movie {watchedUserRating}
+          <span>⭐️</span>
+          </p>
+          
         )}
         </div>
         <p>
