@@ -308,7 +308,9 @@ body {
   padding: 2rem 2.1rem;
   margin-bottom: 0.8rem;
   font-weight: 600;
+  white-space: nowrap; /* Forces everything to stay on one line */
   display: flex;
+  align-items: center;
   flex-direction: column;
   gap: 2.4rem;
 }
