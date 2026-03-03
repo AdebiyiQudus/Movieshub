@@ -162,7 +162,8 @@ export default function App() {
 {/* Parsing watchedProp(watched) which is an array of watched movies to WatchedSummary and WatchedMoviesList components for mapping repectively */}
         <Box>
           {selectedId ? (
-            <MovieDetails selectedIdProp={selectedId} 
+            <MovieDetails 
+            selectedIdProp={selectedId} 
             onCloseMovieE={handleCloseMovie} 
             onAddWatchedE={handleAddWatched}
             watchedProp={watched}
