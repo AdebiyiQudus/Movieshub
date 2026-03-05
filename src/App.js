@@ -310,7 +310,8 @@ function MovieList({ allMoviesList, onSelectMovieE }) {
   return (
     <ul className="list list-movies">
       {allMoviesList?.map((movie) => (
-        <Movie movieProp={movie} key={movie.imdbID} 
+        <Movie 
+        movieProp={movie} key={movie.imdbID} 
         onSelectMovie={onSelectMovieE} />
       ))}
     </ul>
