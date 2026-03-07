@@ -430,7 +430,7 @@ function  MovieDetails({ selectedIdProp, onCloseMovieE,
           )} 
           </> 
         ) : (
-          <p>You already watched this movie and rated it {watchedUserRating}
+          <p> You already watched this movie and rated it {watchedUserRating}
           <span>⭐️</span>
           </p>
           
