@@ -107,7 +107,9 @@ export default function App() {
     setWatched((watched) => [...watched, movie]);
   }  
 
-  // function handleDeleteWatched(id) 
+  function handleDeleteWatched(id) {
+    setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
+  }
 
   // Side effect to fetch movies from OMDB API
   useEffect(function() {
@@ -173,7 +175,8 @@ export default function App() {
           ) : (
             <>
           <WatchedSummary watchedProp={watched} />
-          <WatchedMoviesList watchedProp={watched} />
+          <WatchedMoviesList watchedProp={watched} 
+          onDeleteWatchedE={handleDeleteWatched} />
             </>
           )}
         </Box>
@@ -487,19 +490,19 @@ function WatchedSummary({ watchedProp }) {
 }
 
 // =============== STATELESS COMPONENTS ===============
-function WatchedMoviesList({ watchedProp }) {
+function WatchedMoviesList({ watchedProp, onDeleteWatchedE }) {
   return (
     <ul className="list">
       {watchedProp.map((movie) => (
         <WatchedMovie watchedMovieProp={movie}
-         key={movie.imdbID} />
+         key={movie.imdbID} onDeleteWatchedE={onDeleteWatchedE} />
       ))}
     </ul>
   );
 }
 
 // =============== STATELESS COMPONENTS ===============
-function WatchedMovie({ watchedMovieProp }) {
+function WatchedMovie({ watchedMovieProp, onDeleteWatchedE }) {
   return (
     <li key={watchedMovieProp.imdbID}>
       <img
@@ -521,6 +524,10 @@ function WatchedMovie({ watchedMovieProp }) {
           <span>⏳</span>
           <span>{watchedMovieProp.runtime} min</span>
         </p>
+
+        <button className="btn-delete"
+         onClick={() => onDeleteWatchedE(watchedMovieProp.imdbID)}> X
+         </button>
       </div>
     </li>
   );
