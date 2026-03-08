@@ -107,6 +107,8 @@ export default function App() {
     setWatched((watched) => [...watched, movie]);
   }  
 
+  // function handleDeleteWatched(id) 
+
   // Side effect to fetch movies from OMDB API
   useEffect(function() {
     async function fetchMovies() {
@@ -469,15 +471,15 @@ function WatchedSummary({ watchedProp }) {
         </p>
         <p>
           <span>⭐️</span>
-          <span>{avgImdbRating.toFixed(1)}</span>
+          <span>{avgImdbRating.toFixed(2)}</span>
         </p>
         <p>
           <span>🌟</span>
-          <span>{avgUserRating.toFixed(1)}</span>
+          <span>{avgUserRating.toFixed(2)}</span>
         </p>
         <p>
           <span>⏳</span>
-          <span>{avgRuntime.toFixed(1)} min</span>
+          <span>{avgRuntime} min</span>
         </p>
       </div>
     </div>
