@@ -106,7 +106,7 @@ export default function App() {
   function handleAddWatched(movie) {
     setWatched((watched) => [...watched, movie]);
   }  
-
+// Update Watched List Based on Movie Selected -> remove the selected movie from the watched list by filtering out the movie with the matching ID and returning a new array without that movie
   function handleDeleteWatched(id) {
     setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
   }
