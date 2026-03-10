@@ -344,6 +344,7 @@ function Movie({ movieProp, onSelectMovie }) {
 // ============== STATEFUL COMPONENT ===============
 function  MovieDetails({ selectedIdProp, 
   onCloseMovieE, onAddWatchedE, watchedProp }) { 
+    
   const [movie, setMovie] = useState({})
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState("");
