@@ -137,7 +137,7 @@ export default function App() {
       setIsLoading(false);
     }
      }
-     
+      
      if (query.length < 3) {
       setMovies([]);
       setError("");
@@ -344,7 +344,7 @@ function Movie({ movieProp, onSelectMovie }) {
 // ============== STATEFUL COMPONENT ===============
 function  MovieDetails({ selectedIdProp, 
   onCloseMovieE, onAddWatchedE, watchedProp }) { 
-    
+
   const [movie, setMovie] = useState({})
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState("");
