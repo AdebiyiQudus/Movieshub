@@ -137,7 +137,7 @@ export default function App() {
       setIsLoading(false);
     }
      }
-      
+
      if (query.length < 3) {
       setMovies([]);
       setError("");
@@ -526,6 +526,7 @@ function WatchedMovie({ watchedMovieProp, onDeleteWatchedE }) {
           <span>{watchedMovieProp.runtime} min</span>
         </p>
 
+{/* Delete button to remove movie from watched list by calling onDeleteWatchedE function with the movie's imdbID as an argument */}
         <button className="btn-delete"
          onClick={() => onDeleteWatchedE(watchedMovieProp.imdbID)}> X
          </button>
