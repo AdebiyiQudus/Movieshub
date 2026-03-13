@@ -34,6 +34,7 @@ const tempMovieData = [
   },
 ];
 
+// This is a temporary data for testing the watched list functionality before implementing the API call to fetch movie details and add them to the watched list
 const tempWatchedData = [
   {
     imdbID: "tt1375666",
