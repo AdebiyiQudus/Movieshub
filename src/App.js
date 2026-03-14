@@ -10,6 +10,7 @@
 import StarRating from "./StarRating";
 import { useState } from "react";
 import { useEffect } from "react";
+// Temporary data for testing the movie list functionality before implementing the API call to fetch movies based on search query
 const tempMovieData = [
   {
     imdbID: "tt1375666",
