@@ -358,6 +358,7 @@ function  MovieDetails({ selectedIdProp,
   const watchedUserRating = watchedProp.find((movie) =>
     movie.imdbID === selectedIdProp)?.userRating;
 
+  // Destructure the movie object to get the properties we need for rendering the movie details and adding to the watched list
   const {
     Title: title,
     Poster: poster,
