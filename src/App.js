@@ -62,7 +62,7 @@ const tempWatchedData = [
 
 // PROP DRILLING => passing data from parent component to child component via props (Parsing prop from nested components to access data where needed i.e deeply nested components)
 
-// Qudus Syntax
+// AVERAGE FUNCTION => calculate the average of an array of numbers by summing all the elements and dividing by the length of the array, with a check to return 0 if the array is empty to avoid division by zero errors
 const average = (arr) =>
   arr.length === 0 ? 0
     : arr.reduce((acc, cur) => acc + cur, 0) / arr.length;
