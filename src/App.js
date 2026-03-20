@@ -404,6 +404,15 @@ function  MovieDetails({ selectedIdProp,
     getMovieDetails();
   },[selectedIdProp]);
 
+  useEffect(function() {
+    if (!title) return;
+    document.title = `Movie | ${title}`;
+
+    return function() {
+      document.title = "moviesHub";
+    }
+  }, [title]);
+
   return (
      <div className="details">
     {isLoading ? <Loader /> : (
