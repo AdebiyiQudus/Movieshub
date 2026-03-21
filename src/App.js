@@ -404,6 +404,7 @@ function  MovieDetails({ selectedIdProp,
     getMovieDetails();
   },[selectedIdProp]);
 
+ // Side effect to update the document title based on the selected movie's title and reset it back to the default title when the component unmounts or when the selected movie changes 
   useEffect(function() {
     if (!title) return;
     document.title = `Movie | ${title}`;
