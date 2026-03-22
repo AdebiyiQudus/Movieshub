@@ -158,7 +158,7 @@ export default function App() {
      }
     fetchMovies();
 
-    
+// Cleanup function to abort the fetch request if the component unmounts or if the query changes before the fetch request completes  
     return function() {
       controller.abort();
     };
