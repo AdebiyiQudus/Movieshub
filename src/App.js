@@ -101,7 +101,7 @@ export default function App() {
   }
 
   // Update ID Based on Movie Selected -> if the selected ID is the cuurent selected ID, then set it to null (deselect), otherwise set it to the new ID
-  function handleCloseMovie(id) {
+  function  handleCloseMovie(id) {
     setSelectedId(null);
   }
 
@@ -411,6 +411,7 @@ function  MovieDetails({ selectedIdProp,
 
     return function() {
       document.title = "moviesHub";
+      console.log(`Clean up effect for movie ${title}`);
     }
   }, [title]);
 
