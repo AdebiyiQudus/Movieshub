@@ -7,6 +7,8 @@
 // update watched movie based on current watched and return a new watched movie based on all the element of the new array and the new movie object added to the watched list
 // We use event handlers to react to certain events that happens in the user interface (click, hover, form submission etc)
 
+// AbortController is a built-in JavaScript class that allows us to abort (stop) ongoing fetch requests, which is useful for preventing memory leaks and handling component unmounting scenarios in React applications
+// AbortController is a browser API
 import StarRating from "./StarRating";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -116,11 +118,15 @@ export default function App() {
 
   // Side effect to fetch movies from OMDB API
   useEffect(function() {
+    const controller = new AbortController();
+
     async function fetchMovies() {
      try{ 
       setIsLoading(true);
       const res = await fetch(
-        `http://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=${query}`
+        `http://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=${query}`,
+    // Connect AbortController to the fetch request to allow us to cancel the fetch request if the component unmounts or if the query changes before the fetch request completes
+        { signal: controller.signal }
       );
 
       if (!res.ok) 
@@ -131,10 +137,14 @@ export default function App() {
        throw new Error("Movie not found!");
 
       setMovies(data.Search);
-      console.log(data.Search);
+      setError("");
     } catch(err){
       console.error(err); 
       setError(err.message);
+
+      if (err.name !== "AbortError") {
+        setError(err.message);
+      }
 
     } finally{
       setIsLoading(false);
@@ -147,6 +157,11 @@ export default function App() {
       return;
      }
     fetchMovies();
+
+    
+    return function() {
+      controller.abort();
+    };
   }, [query]); 
 
   return (
