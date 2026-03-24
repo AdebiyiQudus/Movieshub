@@ -424,6 +424,7 @@ function  MovieDetails({ selectedIdProp,
     if (!title) return;
     document.title = `Movie | ${title}`;
 
+ // Cleanup function to reset the document title back to the default title when the component unmounts or when the selected movie changes (title changes)
     return function() {
       document.title = "moviesHub";
       console.log(`Clean up effect for movie ${title}`);
