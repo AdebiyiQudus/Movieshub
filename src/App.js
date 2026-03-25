@@ -113,7 +113,8 @@ export default function App() {
   }  
 // Update Watched List Based on Movie Selected -> remove the selected movie from the watched list by filtering out the movie with the matching ID and returning a new array without that movie
   function handleDeleteWatched(id) {
-    setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
+    setWatched((watched) => 
+    watched.filter((movie) => movie.imdbID !== id));
   }
 
   // Side effect to fetch movies from OMDB API
@@ -423,8 +424,7 @@ function  MovieDetails({ selectedIdProp,
   useEffect(function() {
     if (!title) return;
     document.title = `Movie | ${title}`;
-
- // Cleanup function to reset the document title back to the default title when the component unmounts or when the selected movie changes (title changes)
+  // Cleanup function to reset the document title back to the default title when the component unmounts or when the selected movie changes (title changes)
     return function() {
       document.title = "moviesHub";
       console.log(`Clean up effect for movie ${title}`);
