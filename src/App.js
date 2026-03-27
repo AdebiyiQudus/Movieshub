@@ -66,6 +66,7 @@ const tempWatchedData = [
 
 // AVERAGE FUNCTION => calculate the average of an array of numbers by summing all the elements and dividing by the length of the array, with a check to return 0 if the array is empty to avoid division by zero errors
 // Qudus Syntax => if the array is empty, return 0, otherwise calculate the average by summing all the elements in the array using reduce and dividing by the length of the array
+
 const average = (arr) =>
   arr.length === 0 ? 0
     : arr.reduce((acc, cur) => acc + cur, 0) / arr.length;

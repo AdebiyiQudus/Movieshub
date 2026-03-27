@@ -1,3 +1,4 @@
+// cleanup function is a function that is returned from the useEffect hook and is used to clean up any side effects that were created in the useEffect hook.This helps to prevent memory leaks and ensures that our application behaves correctly even when components are unmounted or when dependencies change.
 import React from "react";
 import ReactDOM from "react-dom/client";
 
