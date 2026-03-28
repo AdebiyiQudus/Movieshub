@@ -281,7 +281,7 @@ function Main({ children }) {
 // =============== STATEFUL COMPONENT ===============
 function Box({ children }) {
   const [isOpen, setIsOpen] = useState(true);
-
+// The toggle functionality show or hide the content. It uses the useState Hook to manage the open/close state of the box and renders a button to toggle the state and conditionally renders the children based on the state.
   return (
     <div className="box">
       <button className="btn-toggle"
