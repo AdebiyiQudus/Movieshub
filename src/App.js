@@ -118,12 +118,15 @@ export default function App() {
     watched.filter((movie) => movie.imdbID !== id));
   }
 
-  useEffect(function(){
+  useEffect(function() {
     document.addEventListener("keydown", function(e) {
       if (e.code === "Escape") {
-        setSelectedId(null);
+        handleCloseMovie();
+        console.log("Closing movie details");
       }
-  })
+   });
+    }, []);
+    
   // Side effect to fetch movies from OMDB API
   useEffect(function() {
     const controller = new AbortController();
