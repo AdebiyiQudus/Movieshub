@@ -118,15 +118,6 @@ export default function App() {
     watched.filter((movie) => movie.imdbID !== id));
   }
 
-  useEffect(function() {
-    document.addEventListener("keydown", function(e) {
-      if (e.code === "Escape") {
-        handleCloseMovie();
-        console.log("Closing movie details");
-      }
-   });
-    }, []);
-    
   // Side effect to fetch movies from OMDB API
   useEffect(function() {
     const controller = new AbortController();
@@ -413,6 +404,24 @@ function  MovieDetails({ selectedIdProp,
     onAddWatchedE(newWatchedMovie);
     onCloseMovieE();
   }
+
+// Side effect to listen for the Escape key press and close the movie details when the Escape key is pressed.
+useEffect(function() {
+  function callback(e) {
+    if (e.code === "Escape") {
+      onCloseMovieE();
+      console.log("Closing movie details");
+    }
+  }
+    document.addEventListener("keydown", callback);
+// Cleanup function to remove the event listener when the component unmounts or when the onCloseMovieE function changes.
+    return function() {
+      document.removeEventListener("keydown", callback);
+    };
+  }, 
+  [onCloseMovieE]
+);
+  
 
 // Side effect to fetch movie details from OMDB API based on selectedIdProp
   useEffect(function () {
