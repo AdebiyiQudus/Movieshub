@@ -75,7 +75,7 @@ const KEY = "45d089db"; // OMDB API key
 
 // COMPONENT COMPOSITION => composing components together to build complex UIs (combining smaller components to create larger, more complex components)
 export default function App() {
-  const [query, setQuery] = useState("inception");
+  const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
 
@@ -141,10 +141,10 @@ export default function App() {
       setMovies(data.Search);
       setError("");
     } catch(err){
-      console.error(err); 
       setError(err.message);
-
+      
       if (err.name !== "AbortError") {
+        console.log(err.name); 
         setError(err.message);
       }
 
@@ -158,6 +158,7 @@ export default function App() {
       setError("");
       return;
      }
+     handleCloseMovie();
     fetchMovies();
 
 // Cleanup function to abort the fetch request if the component unmounts or if the query changes before the fetch request completes  
@@ -410,7 +411,6 @@ useEffect(function() {
   function callback(e) {
     if (e.code === "Escape") {
       onCloseMovieE();
-      console.log("Closing movie details");
     }
   }
     document.addEventListener("keydown", callback);
@@ -446,7 +446,7 @@ useEffect(function() {
   // Cleanup function to reset the document title back to the default title when the component unmounts or when the selected movie changes (title changes)
     return function() {
       document.title = "moviesHub";
-      console.log(`Clean up effect for movie ${title}`);
+      // console.log(`Clean up effect for movie ${title}`);
     }
   }, [title]);
 
