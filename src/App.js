@@ -142,7 +142,7 @@ export default function App() {
       setError("");
     } catch(err){
       setError(err.message);
-      
+   // Check if the error is an AbortError, which occurs when the fetch request is aborted, and if it's not an AbortError, log the error name and set the error message in the state to display it in the UI   
       if (err.name !== "AbortError") {
         console.log(err.name); 
         setError(err.message);
@@ -420,8 +420,7 @@ useEffect(function() {
     };
   }, 
   [onCloseMovieE]
-);
-  
+); 
 
 // Side effect to fetch movie details from OMDB API based on selectedIdProp
   useEffect(function () {
