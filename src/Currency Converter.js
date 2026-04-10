@@ -2,7 +2,7 @@ export default function App() {
 
   const [amount, setAmount] = useState(1);
   const [fromCurrency, setFromCurrency] = useState("USD");
-  
+
   const [toCurrency, setToCurrency] = useState("EUR");
   const [exchangeRate, setExchangeRate] = useState(0);
   return (
@@ -21,6 +21,7 @@ export default function App() {
         <option value="CAD">CAD</option>
         <option value="INR">INR</option>
       </select>
+      
       <select 
         value={toCurrency} 
         onChange={(e) => setToCurrency(e.target.value)}
