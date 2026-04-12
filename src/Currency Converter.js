@@ -27,6 +27,7 @@ export default function App() {
         value={toCurrency} 
         onChange={(e) => setToCurrency(e.target.value)}
       >
+        <option value="NGN">NGN</option>
         <option value="USD">USD</option>
         <option value="EUR">EUR</option>
         <option value="GBP">GBP</option>
