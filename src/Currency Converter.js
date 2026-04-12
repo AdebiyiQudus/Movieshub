@@ -29,6 +29,7 @@ export default function App() {
       >
         <option value="USD">USD</option>
         <option value="EUR">EUR</option>
+        <option value="GBP">GBP</option>
         <option value="CAD">CAD</option>
         <option value="INR">INR</option>
       </select>
