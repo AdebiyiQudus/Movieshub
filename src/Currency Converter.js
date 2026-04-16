@@ -33,7 +33,7 @@ export default function App() {
         <option value="GBP">GBP</option>
         <option value="CAD">CAD</option>
       </select>
-  
+      <button onClick={handleConvert}>Convert</button> 
     </div>
   );
 }
