@@ -34,6 +34,8 @@ export default function App() {
         <option value="CAD">CAD</option>
       </select>
       <button onClick={handleConvert}>Convert</button> 
+      <h2>Converted Amount: {amount * exchangeRate}</h2>
+      
     </div>
   );
 }
