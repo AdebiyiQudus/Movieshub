@@ -4,8 +4,8 @@ export default function App() {
   const [fromCurrency, setFromCurrency] = useState("USD");
 
   const [toCurrency, setToCurrency] = useState("EUR");
-  const [exchangeRate, setExchangeRate] = useState(0);
-  
+  const [exchangeRate, setExchangeRate] = useState(0)
+
   return (
     <div>
       <input 
@@ -17,6 +17,7 @@ export default function App() {
         value={fromCurrency} 
         onChange={(e) => setFromCurrency(e.target.value)}
       >
+        <option value="NGN">NGN</option>
         <option value="USD">USD</option>
         <option value="EUR">EUR</option>
         <option value="CAD">CAD</option>
@@ -27,8 +28,8 @@ export default function App() {
         value={toCurrency} 
         onChange={(e) => setToCurrency(e.target.value)}
       >
-        <option value="NGN">NGN</option>
         <option value="USD">USD</option>
+        <option value="NGN">NGN</option>
         <option value="EUR">EUR</option>
         <option value="GBP">GBP</option>
         <option value="CAD">CAD</option>
