@@ -546,7 +546,8 @@ function WatchedMoviesList({ watchedProp, onDeleteWatchedE }) {
     <ul className="list">
       {watchedProp.map((movie) => (
         <WatchedMovie watchedMovieProp={movie}
-         key={movie.imdbID} onDeleteWatchedE={onDeleteWatchedE} />
+         key={movie.imdbID} 
+         onDeleteWatchedE={onDeleteWatchedE} />
       ))}
     </ul>
   );
