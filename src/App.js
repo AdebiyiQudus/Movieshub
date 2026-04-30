@@ -579,7 +579,8 @@ function WatchedMovie({ watchedMovieProp, onDeleteWatchedE }) {
 
 {/* Delete button to remove movie from watched list by calling onDeleteWatchedE function with the movie's imdbID as an argument */}
         <button className="btn-delete"
-         onClick={() => onDeleteWatchedE(watchedMovieProp.imdbID)}> X
+         onClick={() => onDeleteWatchedE
+          (watchedMovieProp.imdbID)}> X
          </button>
       </div>
     </li>
