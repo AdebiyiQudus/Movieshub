@@ -14,7 +14,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 // Temporary data for testing the movie list functionality before implementing the API call to fetch movies based on search query
 
-// is the error message coming from the new Error throwed or the error message is coming from the data response fetch  Api
+// This is the error message coming from the new Error throwed or the error message is coming from the data response fetch  Api
 
 // PROP DRILLING => passing data from parent component to child component via props (Parsing prop from nested components to access data where needed i.e deeply nested components)
 
