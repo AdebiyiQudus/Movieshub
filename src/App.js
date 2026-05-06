@@ -339,6 +339,12 @@ function  MovieDetails({ selectedIdProp,
   /* early return which also make hooks not in order as stated in the hooks rules */
   // if(imdbRating > 8) return <p> Greatest Ever! </p>
 
+  const [isCustomHook, setIsCustomHook] = useState(imdbRating > 8);
+  console.log(isCustomHook)
+  useEffect(function() {
+     setIsCustomHook(imdbRating > 8);
+  }, [imdbRating]);
+
   // Function to handle adding a movie to the watched list
   function handleAddWatched() {
     const newWatchedMovie = {
