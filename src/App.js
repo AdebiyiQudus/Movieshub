@@ -339,12 +339,15 @@ function  MovieDetails({ selectedIdProp,
   /* early return which also make hooks not in order as stated in the hooks rules */
   // if(imdbRating > 8) return <p> Greatest Ever! </p>
 
-  const [isCustomHook, setIsCustomHook] = useState(imdbRating > 8);
-  console.log(isCustomHook)
-  useEffect(function() {
-     setIsCustomHook(imdbRating > 8);
-  }, [imdbRating]);
+  // const [isCustomHook, setIsCustomHook] = useState(imdbRating > 8);
+  // console.log(isCustomHook)
+  // useEffect(function() {
+  //    setIsCustomHook(imdbRating > 8);
+  // }, [imdbRating]);
 
+  // DERIVED STATE => state that can be derived from other state or props (computed state based on other state or props), and automatically updates when the dependencies changes
+    const isCustomHook = imdbRating > 8;
+    console.log(isCustomHook)
   // Function to handle adding a movie to the watched list
   function handleAddWatched() {
     const newWatchedMovie = {
