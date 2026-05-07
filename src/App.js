@@ -350,6 +350,7 @@ function  MovieDetails({ selectedIdProp,
     console.log(isCustomHook)
 
   const [AvgRating, setAvgRating] = useState(0);
+
   // Function to handle adding a movie to the watched list
   function handleAddWatched() {
     const newWatchedMovie = {
