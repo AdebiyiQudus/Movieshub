@@ -435,7 +435,9 @@ useEffect(function() {
       </div>
       </header>
 
+    // Display AvgRating in UI
       <p>{AvgRating.toFixed(1)}</p>
+
       <section> 
         <div className="rating">
         {!isWatched ? (
