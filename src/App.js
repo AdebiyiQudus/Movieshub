@@ -348,6 +348,8 @@ function  MovieDetails({ selectedIdProp,
   // DERIVED STATE => state that can be derived from other state or props (computed state based on other state or props), and automatically updates when the dependencies changes
     const isCustomHook = imdbRating > 8;
     console.log(isCustomHook)
+
+  const [AvgRating, setAvgRating] = useState(0);
   // Function to handle adding a movie to the watched list
   function handleAddWatched() {
     const newWatchedMovie = {
@@ -360,7 +362,10 @@ function  MovieDetails({ selectedIdProp,
       userRating,
     };
     onAddWatchedE(newWatchedMovie);
-    onCloseMovieE();
+    // onCloseMovieE(); 
+
+    setAvgRating(Number(imdbRating));
+  setAvgRating((curAvgRating) => (curAvgRating + userRating) / 2);
   }
 
 // Side effect to listen for the Escape key press and close the movie details when the Escape key is pressed.
@@ -429,6 +434,7 @@ useEffect(function() {
       </div>
       </header>
 
+      <p>{AvgRating.toFixed(1)}</p>
       <section> 
         <div className="rating">
         {!isWatched ? (
