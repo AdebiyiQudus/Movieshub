@@ -366,7 +366,8 @@ function  MovieDetails({ selectedIdProp,
     // onCloseMovieE(); 
 
     setAvgRating(Number(imdbRating));
-  setAvgRating((curAvgRating) => (curAvgRating + userRating) / 2);
+    setAvgRating((curAvgRating) => 
+      (curAvgRating + userRating) / 2);
   }
 
 // Side effect to listen for the Escape key press and close the movie details when the Escape key is pressed.
