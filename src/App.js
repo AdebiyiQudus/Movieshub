@@ -363,7 +363,7 @@ function  MovieDetails({ selectedIdProp,
       userRating,
     };
     onAddWatchedE(newWatchedMovie);
-    onCloseMovieE(); 
+    // onCloseMovieE(); 
 
     setAvgRating(Number(imdbRating));
     setAvgRating((curAvgRating) => 
