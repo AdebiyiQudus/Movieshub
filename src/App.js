@@ -349,7 +349,7 @@ function  MovieDetails({ selectedIdProp,
     const isCustomHook = imdbRating > 8;
     console.log(isCustomHook)
 
-  const [AvgRating, setAvgRating] = useState(0);
+  // const [AvgRating, setAvgRating] = useState(0);
 
   // Function to handle adding a movie to the watched list
   function handleAddWatched() {
@@ -365,9 +365,9 @@ function  MovieDetails({ selectedIdProp,
     onAddWatchedE(newWatchedMovie);
     // onCloseMovieE(); 
 
-    setAvgRating(Number(imdbRating));
-    setAvgRating((curAvgRating) => 
-      (curAvgRating + userRating) / 2);
+    // setAvgRating(Number(imdbRating));
+    // setAvgRating((curAvgRating) => 
+    //   (curAvgRating + userRating) / 2);
   }
 
 // Side effect to listen for the Escape key press and close the movie details when the Escape key is pressed.
@@ -437,7 +437,7 @@ useEffect(function() {
       </header>
 
     // Display AvgRating in UI
-      <p>{AvgRating.toFixed(1)}</p>
+      {/* <p>{AvgRating.toFixed(1)}</p> */}
 
       <section> 
         <div className="rating">
