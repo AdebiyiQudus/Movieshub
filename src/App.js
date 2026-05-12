@@ -31,11 +31,17 @@ const KEY = "45d089db"; // OMDB API key
 export default function App() {
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
-  const [watched, setWatched] = useState([]);
-
+  
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
+  // const [watched, setWatched] = useState([]);
+
+  // Initialize the watched state with the value from local storage if it exists, otherwise initialize it with an empty array.
+  const [watched, setWatched] = useState(function (){
+    const storedValue = localStorage.getItem("watched");
+    return JSON.parse(storedValue) || [];
+  });
 
 
   // Update ID Based on Movie Selected
@@ -203,6 +209,12 @@ function Logo() {
 
 //STATEFUL COMPONENTS => manages and maintains its own state
 function Search({queryProp, setQueryProp}) {
+  useEffect(function() {
+    const el = document.querySelector(".search-container input");
+    console.log(el);
+    el.focus();
+  },[]);
+
   return (
     <div className="search-container">
       <div className="search">
