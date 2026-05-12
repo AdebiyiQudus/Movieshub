@@ -54,9 +54,16 @@ export default function App() {
     setWatched((watched) => [...watched, movie]);
       
       // Update Watched List Based on Movie Selected -> add the selected movie to the local storage and set with a key of "watched"
-      localStorage.setItem("watched", JSON.stringify([...watched, movie]));
+      // localStorage.setItem("watched", JSON.stringify([...watched, movie]));
       
     }
+
+    // Using useEffect to update Watched List Based on Movie Selected -> add the selected movie to the local storage and set with a key of "watched"
+    useEffect(
+      function() {
+      localStorage.setItem("watched", JSON.stringify(watched));
+    }, 
+    [watched]);
      
 // Update Watched List Based on Movie Selected -> remove the selected movie from the watched list by filtering out the movie with the matching ID and returning a new array without that movie
   function handleDeleteWatched(id) {
