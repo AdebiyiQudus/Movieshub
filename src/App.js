@@ -51,15 +51,13 @@ export default function App() {
 
   // Update Watched List Based on Movie Selected -> add the selected movie to the watched list by creating a new array with the current watched movies and the new movie object added to the end of the array
   function handleAddWatched(movie) {
-    setWatched((watched) => {
-      const updatedWatched = [...watched, movie];
+    setWatched((watched) => [...watched, movie]);
       
       // Update Watched List Based on Movie Selected -> add the selected movie to the local storage and set with a key of "watched"
       localStorage.setItem("watched", JSON.stringify([...watched, movie]));
-      return updatedWatched;
-    });
-    
-  }  
+      
+    }
+     
 // Update Watched List Based on Movie Selected -> remove the selected movie from the watched list by filtering out the movie with the matching ID and returning a new array without that movie
   function handleDeleteWatched(id) {
     setWatched((watched) => 
