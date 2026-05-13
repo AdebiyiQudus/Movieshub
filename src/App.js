@@ -10,7 +10,7 @@
 // AbortController is a built-in JavaScript class that allows us to abort (stop) ongoing fetch requests, which is useful for preventing memory leaks and handling component unmounting scenarios in React applications
 // AbortController is a browser API
 import StarRating from "./StarRating";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useEffect } from "react";
 // Temporary data for testing the movie list functionality before implementing the API call to fetch movies based on search query
 
@@ -209,11 +209,28 @@ function Logo() {
 
 //STATEFUL COMPONENTS => manages and maintains its own state
 function Search({queryProp, setQueryProp}) {
-  useEffect(function() {
-    const el = document.querySelector(".search-container input");
-    console.log(el);
-    el.focus();
-  },[]);
+  const inputEl = useRef(null);
+
+  useEffect(
+    function() {
+     function callback(e) {
+      if(document.activeElement === inputEl.current) 
+       return;
+
+      if (e.code === "Enter") {
+        inputEl.current.focus();
+        setQueryProp("");
+      }}
+
+      document.addEventListener("keydown", callback);
+      return () => document.addEventListener("keydown", callback);
+    }, [setQueryProp]);
+
+  // useEffect(function() {
+  //   const el = document.querySelector(".search-container input");
+  //   console.log(el);
+  //   el.focus();
+  // },[]);
 
   return (
     <div className="search-container">
@@ -225,6 +242,7 @@ function Search({queryProp, setQueryProp}) {
           placeholder="Search movies..."
           value={queryProp}
           onChange={(e) => setQueryProp(e.target.value)}
+          ref={inputEl}
         />
       </div>
     </div>
