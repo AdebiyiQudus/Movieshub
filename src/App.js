@@ -20,7 +20,7 @@ import { useEffect } from "react";
 
 // AVERAGE FUNCTION => calculate the average of an array of numbers by summing all the elements and dividing by the length of the array, with a check to return 0 if the array is empty to avoid division by zero errors
 // Qudus Syntax => if the array is empty, return 0, otherwise calculate the average by summing all the elements in the array using reduce and dividing by the length of the array
-
+// useRef => to create a mutable reference that persists across renders and can be used to access DOM elements or store mutable values without causing re-renders when the value changes. 
 const average = (arr) =>
   arr.length === 0 ? 0
     : arr.reduce((acc, cur) => acc + cur, 0) / arr.length;
@@ -223,7 +223,7 @@ function Search({queryProp, setQueryProp}) {
       }}
 
       document.addEventListener("keydown", callback);
-      return () => document.addEventListener("keydown", callback);
+      return () => document.removeEventListener("keydown", callback);
     }, [setQueryProp]);
 
   // useEffect(function() {
@@ -354,6 +354,14 @@ function  MovieDetails({ selectedIdProp,
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState("");
 
+  const countRef = useRef(0);
+
+  useEffect(function() {
+     if (userRating) 
+      countRef.current++;
+   // OR countRef.current = countRef.current + 1;
+  }, [userRating]);
+
   // Check if this (watched) array of object includes the array that is currently selected by the user (selectedIdProp) 
   const isWatched = watchedProp.map((movie) => 
     movie.imdbID).includes(selectedIdProp);
@@ -403,9 +411,10 @@ function  MovieDetails({ selectedIdProp,
       imdbRating: Number(imdbRating),
       runtime: Number(runtime.split(" ").at(0)),
       userRating,
+      countRatingDecisions: countRef.current,
     };
     onAddWatchedE(newWatchedMovie);
-    // onCloseMovieE(); 
+     onCloseMovieE(); 
 
     // setAvgRating(Number(imdbRating));
     // setAvgRating((curAvgRating) => 
