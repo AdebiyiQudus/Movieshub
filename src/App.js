@@ -354,8 +354,9 @@ function  MovieDetails({ selectedIdProp,
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState("");
 
+  // Default countRef = 0
   const countRef = useRef(0);
-
+ 
   useEffect(function() {
      if (userRating) 
       countRef.current++;
