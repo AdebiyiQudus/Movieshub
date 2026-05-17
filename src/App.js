@@ -357,6 +357,7 @@ function  MovieDetails({ selectedIdProp,
 
   // Default countRef = 0
   const countRef = useRef(0);
+  // let countRef = (0 Reset count to 0 after re-render)
  
   useEffect(function() {
      if (userRating) 
