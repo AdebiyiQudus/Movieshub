@@ -119,7 +119,7 @@ export default function App() {
       setError("");
       return;
      }
-     handleCloseMovie();
+    //  handleCloseMovie();
     fetchMovies();
 
 // Cleanup function to abort the fetch request if the component unmounts or if the query changes before the fetch request completes  
@@ -209,6 +209,7 @@ function Logo() {
 }
 
 //STATEFUL COMPONENTS => manages and maintains its own state
+
 function Search({queryProp, setQueryProp}) {
   const inputEl = useRef(null);
 
