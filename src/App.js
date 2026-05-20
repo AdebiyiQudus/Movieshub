@@ -10,7 +10,7 @@
 // AbortController is a built-in JavaScript class that allows us to abort (stop) ongoing fetch requests, which is useful for preventing memory leaks and handling component unmounting scenarios in React applications
 // AbortController is a browser API
 import StarRating from "./StarRating";
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { useEffect } from "react";
 import { useMovies } from "./useMovies";
 // Temporary data for testing the movie list functionality before implementing the API call to fetch movies based on search query
@@ -33,8 +33,13 @@ const KEY = "45d089db"; // OMDB API key
 export default function App() {
   const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState(null);
-  const { movies, isLoading, error } = useMovies(query);
-  // const [watched, setWatched] = useState([]);
+  const handleCloseMovie = useCallback(function() {
+    setSelectedId(null);
+  }, []);
+  
+  const { movies, isLoading, error } = useMovies(query, 
+  handleCloseMovie);
+  // const [watched, setWatched] = useState([])
 
   // Initialize the watched state with the value from local storage if it exists, otherwise initialize it with an empty array.
   const [watched, setWatched] = useState(function (){
@@ -50,9 +55,9 @@ export default function App() {
   }
 
   // Update ID Based on Movie Selected -> if the selected ID is the cuurent selected ID, then set it to null (deselect), otherwise set it to the new ID
-  function handleCloseMovie(id) {
-    setSelectedId(null);
-  }
+  // function handleCloseMovie(id) {
+  //   setSelectedId(null);
+  // }
 
   // Update Watched List Based on Movie Selected -> add the selected movie to the watched list by creating a new array with the current watched movies and the new movie object added to the end of the array
   function handleAddWatched(movie) {
