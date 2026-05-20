@@ -12,6 +12,7 @@
 import StarRating from "./StarRating";
 import { useRef, useState } from "react";
 import { useEffect } from "react";
+import { useMovies } from "./useMovies";
 // Temporary data for testing the movie list functionality before implementing the API call to fetch movies based on search query
 
 // This is the error message coming from the new Error throwed or the error message is coming from the data response fetch  Api
@@ -31,11 +32,8 @@ const KEY = "45d089db"; // OMDB API key
 // COMPONENT COMPOSITION => composing components together to build complex UIs (combining smaller components to create larger, more complex components)
 export default function App() {
   const [query, setQuery] = useState("");
-  const [movies, setMovies] = useState([]);
-  
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
+  const { movies, isLoading, error } = useMovies(query);
   // const [watched, setWatched] = useState([]);
 
   // Initialize the watched state with the value from local storage if it exists, otherwise initialize it with an empty array.
@@ -78,56 +76,7 @@ export default function App() {
     watched.filter((movie) => movie.imdbID !== id));
   }
 
-  // Side effect to fetch movies from OMDB API
-  useEffect(function() {
-    const controller = new AbortController();
-
-    async function fetchMovies() {
-     try{ 
-      setIsLoading(true);
-      const res = await fetch(
-        `http://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=${query}`,
-    // Connect AbortController to the fetch request to allow us to cancel the fetch request if the component unmounts or if the query changes before the fetch request completes
-        { signal: controller.signal }
-      );
-
-      if (!res.ok) 
-       throw new Error("Something went wrong with fetching movies");
-
-      const data = await res.json();
-      if (data.Response === "False")
-       throw new Error("Movie not found!");
-
-      setMovies(data.Search);
-      setError("");
-    } catch(err){
-      setError(err.message);
-
-   // Check if the error is an AbortError, which occurs when the fetch request is aborted, and if it's not an AbortError, log the error name and set the error message in the state to display it in the UI   
-      if (err.name !== "AbortError") {
-        console.log(err.name); 
-        setError(err.message);
-      }
-
-    } finally{
-      setIsLoading(false);
-    }
-     }
-
-     if (query.length < 3) {
-      setMovies([]);
-      setError("");
-      return;
-     }
-    //  handleCloseMovie();
-    fetchMovies();
-
-// Cleanup function to abort the fetch request if the component unmounts or if the query changes before the fetch request completes  
-    return function() {
-      controller.abort();
-    };
-  }, [query]); 
-
+ 
   return (
     <>
       <Navbar>
