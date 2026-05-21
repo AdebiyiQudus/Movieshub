@@ -13,6 +13,7 @@ import StarRating from "./StarRating";
 import { useCallback, useRef, useState } from "react";
 import { useEffect } from "react";
 import { useMovies } from "./useMovies";
+import { useLocalStorageState } from "./useLocalStorageState";
 // Temporary data for testing the movie list functionality before implementing the API call to fetch movies based on search query
 
 // This is the error message coming from the new Error throwed or the error message is coming from the data response fetch  Api
@@ -37,16 +38,17 @@ export default function App() {
     setSelectedId(null);
   }, []);
   
-  const { movies, isLoading, error } = useMovies(query, 
-  handleCloseMovie);
+  const [watched, setWatched] = useLocalStorageState();
   // const [watched, setWatched] = useState([])
-
+  
   // Initialize the watched state with the value from local storage if it exists, otherwise initialize it with an empty array.
-  const [watched, setWatched] = useState(function (){
-    const storedValue = localStorage.getItem("watched");
-    return JSON.parse(storedValue) || [];
-  });
-
+  // const [watched, setWatched] = useState(function (){
+    //   const storedValue = localStorage.getItem("watched");
+    //   return JSON.parse(storedValue) || [];
+    // });
+    
+    const { movies, isLoading, error } = useMovies(query, 
+    handleCloseMovie);
 
   // Update ID Based on Movie Selected
   function handleSelectMovie(id) { 
