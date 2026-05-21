@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import { useCallback } from "react";
+
 
 const KEY = "45d089db"; // OMDB API key
 export function useMovies  (query, callback) {
