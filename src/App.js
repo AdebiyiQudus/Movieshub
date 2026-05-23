@@ -38,7 +38,7 @@ export default function App() {
     setSelectedId(null);
   }, []);
   
-  const [watched, setWatched] = useLocalStorageState();
+  const [watched, setWatched] = useLocalStorageState([], "watched");
   // const [watched, setWatched] = useState([])
   
   // Initialize the watched state with the value from local storage if it exists, otherwise initialize it with an empty array.
