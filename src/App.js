@@ -10,7 +10,7 @@
 // AbortController is a built-in JavaScript class that allows us to abort (stop) ongoing fetch requests, which is useful for preventing memory leaks and handling component unmounting scenarios in React applications
 // AbortController is a browser API
 import StarRating from "./StarRating";
-import { useCallback, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useEffect } from "react";
 import { useMovies } from "./useMovies";
 import { useLocalStorageState } from "./useLocalStorageState";
@@ -34,9 +34,7 @@ const KEY = "45d089db"; // OMDB API key
 export default function App() {
   const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState(null);
-  const handleCloseMovie = useCallback(function() {
-    setSelectedId(null);
-  }, []);
+  const { movies, isLoading, error } = useMovies(query);
   
   const [watched, setWatched] = useLocalStorageState([], "watched");
   // const [watched, setWatched] = useState([])
@@ -47,14 +45,19 @@ export default function App() {
     //   return JSON.parse(storedValue) || [];
     // });
     
-    const { movies, isLoading, error } = useMovies(query, 
-    handleCloseMovie);
+    // Update ID Based on Movie Selected
+    function handleSelectMovie(id) { 
+     setSelectedId((selectedId) => 
+      (id === selectedId ? null : id));
+    }
 
-  // Update ID Based on Movie Selected
-  function handleSelectMovie(id) { 
-   setSelectedId((selectedId) => 
-    (id === selectedId ? null : id));
-  }
+    function handleCloseMovie() {
+      setSelectedId(null);
+    }
+      
+      // const handleCloseMovie = useCallback(function() {
+      //   setSelectedId(null);
+      // }, []);
 
   // Update ID Based on Movie Selected -> if the selected ID is the cuurent selected ID, then set it to null (deselect), otherwise set it to the new ID
   // function handleCloseMovie(id) {
