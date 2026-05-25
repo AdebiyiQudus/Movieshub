@@ -1,3 +1,4 @@
+// whatever data/value is stored in the LS will be  used as Initial state value after  every render, and every time the state changes, the new value is saved (updated) to localStorage.
 import { useState, useEffect } from "react";
 
 // initialState is []: the default value to use if nothing is saved to the localStorage.
