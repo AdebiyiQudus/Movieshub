@@ -14,6 +14,7 @@ import { useRef, useState } from "react";
 import { useEffect } from "react";
 import { useMovies } from "./useMovies";
 import { useLocalStorageState } from "./useLocalStorageState";
+import { useKey } from "./useKey";
 // Temporary data for testing the movie list functionality before implementing the API call to fetch movies based on search query
 
 // This is the error message coming from the new Error throwed or the error message is coming from the data response fetch  Api
@@ -384,21 +385,7 @@ function  MovieDetails({ selectedIdProp,
     //   (curAvgRating + userRating) / 2);
   }
 
-// Side effect to listen for the Escape key press and close the movie details when the Escape key is pressed.
-useEffect(function() {
-  function callback(e) {
-    if (e.code === "Escape") {
-      onCloseMovieE();
-    }
-  }
-    document.addEventListener("keydown", callback);
-// Cleanup function to remove the event listener when the component unmounts or when the onCloseMovieE function changes.
-    return function() {
-      document.removeEventListener("keydown", callback);
-    };
-  }, 
-  [onCloseMovieE]
-); 
+  useKey("Escape", onCloseMovieE);
 
 // Side effect to fetch movie details from OMDB API based on selectedIdProp
   useEffect(function () {
