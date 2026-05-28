@@ -1,5 +1,5 @@
 import {useEffect} from "react";
-// action => serves as callback function
+// action : onClosemovieE => serves as callback function
 
 export function useKey(key, action) {
  // Side effect to listen for the Escape key press and close the movie details when the Escape key is pressed.

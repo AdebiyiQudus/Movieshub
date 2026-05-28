@@ -173,26 +173,28 @@ function Logo() {
 function Search({queryProp, setQueryProp}) {
   const inputEl = useRef(null);
 
-  useEffect(
-    function() {
-     function callback(e) {
-      if(document.activeElement === inputEl.current) 
-       return;
+  useKey("Enter",function () {
+    if(document.activeElement === inputEl.current) 
+     return;
+      inputEl.current.focus();
+      setQueryProp("");
+    
+  } )
 
-      if (e.code === "Enter") {
-        inputEl.current.focus();
-        setQueryProp("");
-      }}
+  // useEffect(
+  //   function() {
+  //    function callback(e) {
+  //     if(document.activeElement === inputEl.current) 
+  //      return;
 
-      document.addEventListener("keydown", callback);
-      return () => document.removeEventListener("keydown", callback);
-    }, [setQueryProp]);
+  //     if (e.code === "Enter") {
+  //       inputEl.current.focus();
+  //       setQueryProp("");
+  //     }}
 
-  // useEffect(function() {
-  //   const el = document.querySelector(".search-container input");
-  //   console.log(el);
-  //   el.focus();
-  // },[]);
+  //     document.addEventListener("keydown", callback);
+  //     return () => document.removeEventListener("keydown", callback);
+  //   }, [setQueryProp]);
 
   return (
     <div className="search-container">
