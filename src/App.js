@@ -25,6 +25,7 @@ import { useKey } from "./useKey";
 // Qudus Syntax => if the array is empty, return 0, otherwise calculate the average by summing all the elements in the array using reduce and dividing by the length of the array
 // useRef => to create a mutable reference that persists across renders and can be used to access DOM elements or store mutable values without causing re-renders when the value changes. 
 
+const PLACEHOLDER_IMAGE = "https://via.placeholder.com/400x600.png?text=No+Poster+Available";
 const average = (arr) =>
   arr.length === 0 ? 0
     : arr.reduce((acc, cur) => acc + cur, 0) / arr.length;
@@ -424,7 +425,16 @@ function  MovieDetails({ selectedIdProp,
       <button className="btn-back" onClick={onCloseMovieE}>
         &larr;
       </button>
-      <img src={poster} alt={`Poster of ${title} movie`} />
+      <img 
+  // 1. Checks if the 'poster' variable from the API is "N/A"
+  src={poster === "N/A" ? PLACEHOLDER_IMAGE : poster} 
+  alt={`Poster of ${title} movie`} 
+  // 2. Safely falls back if the link is broken/dead
+  onError={(e) => {
+    e.target.onerror = null; 
+    e.target.src = PLACEHOLDER_IMAGE;
+  }}
+/>
       <div className="details-overview">
         <h2>{title}</h2>
 
