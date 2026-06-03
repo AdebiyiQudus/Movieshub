@@ -20,7 +20,7 @@ export function useMovies  (query, callback) {
        try{ 
         setIsLoading(true);
         const res = await fetch(
-          `http://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=${query}`,
+          `https://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=${query}`,
       // Connect AbortController to the fetch request to allow us to cancel the fetch request if the component unmounts or if the query changes before the fetch request completes
           { signal: controller.signal }
         );

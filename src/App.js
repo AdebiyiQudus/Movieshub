@@ -394,7 +394,7 @@ function  MovieDetails({ selectedIdProp,
     async function getMovieDetails() {
       setIsLoading(true);
        const res = await fetch(
-        `http://www.omdbapi.com/?apikey=${KEY}&i=${selectedIdProp}`
+        `https://www.omdbapi.com/?apikey=${KEY}&i=${selectedIdProp}`
       );
 
       const data = await res.json();
