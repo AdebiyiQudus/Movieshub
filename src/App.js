@@ -25,7 +25,7 @@ import { useKey } from "./useKey";
 // Qudus Syntax => if the array is empty, return 0, otherwise calculate the average by summing all the elements in the array using reduce and dividing by the length of the array
 // useRef => to create a mutable reference that persists across renders and can be used to access DOM elements or store mutable values without causing re-renders when the value changes. 
 
-const PLACEHOLDER_IMAGE = "https://via.placeholder.com/400x600.png?text=No+Poster+Available";
+const PLACEHOLDER_IMAGE = "https://images.unsplash.com/photo-1594322436404-5a0526db4d13?q=80&w=400&auto=format&fit=crop";
 const average = (arr) =>
   arr.length === 0 ? 0
     : arr.reduce((acc, cur) => acc + cur, 0) / arr.length;
@@ -297,8 +297,16 @@ function MovieList({ allMoviesList, onSelectMovieE }) {
 function Movie({ movieProp, onSelectMovie }) {
   return (
     <li onClick={() => onSelectMovie(movieProp.imdbID)}>
-      <img src={movieProp.Poster} 
-      alt={`${movieProp.Title} poster`} />
+      {/* <img src={movieProp.Poster} 
+      alt={`${movieProp.Title} poster`} /> */}
+        <img 
+    src={movieProp.Poster === "N/A" ? PLACEHOLDER_IMAGE : movieProp.Poster} 
+    alt={`${movieProp.Title} poster`} 
+    onError={(e) => {
+      e.target.onerror = null; 
+      e.target.src = PLACEHOLDER_IMAGE;
+    }}
+    />
       <h3>{movieProp.Title}</h3>
 
       <div>
@@ -417,6 +425,16 @@ function  MovieDetails({ selectedIdProp,
     }
   }, [title]);
 
+  useEffect(function() {
+    // Only auto-scroll if the user is on a mobile device screen size
+    if (window.innerWidth <= 768) {
+      window.scrollTo({
+        top: 380, // Adjusts the screen view down past the search box
+        behavior: "smooth" 
+      });
+    }
+  }, [selectedIdProp]); 
+
   return (
      <div className="details">
     {isLoading ? <Loader /> : (
@@ -425,6 +443,9 @@ function  MovieDetails({ selectedIdProp,
       <button className="btn-back" onClick={onCloseMovieE}>
         &larr;
       </button>
+      
+      {/* <img src={poster} alt={`Poster of ${title} movie`} /> */}
+
       <img 
   // 1. Checks if the 'poster' variable from the API is "N/A"
   src={poster === "N/A" ? PLACEHOLDER_IMAGE : poster} 
@@ -538,10 +559,21 @@ function WatchedMoviesList({ watchedProp, onDeleteWatchedE }) {
 function WatchedMovie({ watchedMovieProp, onDeleteWatchedE }) {
   return (
     <li key={watchedMovieProp.imdbID}>
-      <img
+      {/* <img
         src={watchedMovieProp.Poster}
         alt={`${watchedMovieProp.Title} poster`}
-      />
+      /> */}
+
+      <img 
+  // Checks if the watched movie has "N/A" as a poster
+  src={watchedMovieProp.Poster === "N/A" ? PLACEHOLDER_IMAGE : watchedMovieProp.Poster} 
+  alt={`${watchedMovieProp.Title} poster`} 
+  // Catches broken URLs
+  onError={(e) => {
+    e.target.onerror = null; 
+    e.target.src = PLACEHOLDER_IMAGE;
+  }}
+/>
       <h3>{watchedMovieProp.Title}</h3>
 
       <div>

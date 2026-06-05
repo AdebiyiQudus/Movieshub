@@ -364,6 +364,84 @@ body {
   justify-content: center;
 }
 
+/* ==========================================================================
+   RESPONSIVE DESIGN MEDIA QUERIES (CENTERED LAYOUT UPDATE)
+   ========================================================================== */
+
+/* 1. Tablets and iPads (Screens smaller than 900px) */
+@media (max-width: 56.25em) { /* ~900px */
+  .main {
+    width: 95vw;
+    gap: 1.6rem;
+    margin: 0 auto; /* Centers the container on the screen */
+  }
+}
+
+/* 2. Mobile Phones & Tablets in Portrait (Screens smaller than 768px) */
+@media (max-width: 48em) { /* ~768px */
+  .main {
+    flex-direction: column;
+    align-items: center; /* 🔥 This perfectly centers both boxes on the screen */
+    height: auto;
+    gap: 2.4rem;
+    margin: 0 auto 4rem auto; /* Centers the layout and adds space at the bottom */
+    width: 100%;
+  }
+
+  /* Make the left search box and right details box center beautifully */
+  .box {
+    width: 90% !important; /* Prevents them from hitting the screen edges rigidly */
+    max-width: 45rem;      /* Keeps them from stretching too wide on large tablets */
+    height: 50rem;
+  }
+
+  /* Optimize the Details box height when open */
+  .box:last-of-type {
+    height: auto;
+    min-height: 40rem;
+  }
+
+  /* Make the purple header navbar look neat and centered on small screens */
+  .nav-bar {
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
+    padding: 2rem;
+    height: auto;
+    text-align: center;
+  }
+
+  /* Center all navbar items */
+  .logo {
+    justify-self: center;
+    display: flex;
+    justify-content: center;
+  }
+
+  .search {
+    width: 90% !important;
+    justify-self: center;
+  }
+
+  .num-results {
+    justify-self: center;
+  }
+}
+
+/* 3. Small Mobile Phones (Screens smaller than 450px) */
+@media (max-width: 28.125em) { /* ~450px */
+  .box {
+    width: 95% !important; /* Gives mobile phones slightly more screen real estate */
+  }
+  
+  .main {
+    padding: 0 1rem;
+  }
+
+  .list-movies li {
+    font-size: 1.4rem;
+    gap: 1.6rem;
+  }
+}
 /*
 SPACING SYSTEM (px)
 2 / 4 / 8 / 12 / 16 / 24 / 32 / 40 / 48 / 64 / 80 / 96 / 128
