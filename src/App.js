@@ -425,6 +425,7 @@ function  MovieDetails({ selectedIdProp,
     }
   }, [title]);
 
+  // Side effect to auto-scroll the screen down to the movie details section when a movie is selected 
   useEffect(function() {
     // Only auto-scroll if the user is on a mobile device screen size
     if (window.innerWidth <= 768) {
